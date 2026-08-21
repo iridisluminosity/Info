@@ -1,0 +1,33 @@
+# log
+
+<mark style="color:purple;">`log`</mark> `add(`<mark style="color:green;">`message`</mark>, <mark style="color:green;">`color`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Description</th><th data-hidden>Description</th></tr></thead><tbody><tr><td>message</td><td><mark style="color:green;"><code>string</code></mark></td><td>What you want to log</td><td>What you want to log</td></tr><tr><td>color</td><td><mark style="color:green;"><code>color</code></mark></td><td>Optional color for the log</td><td></td></tr></tbody></table>
+
+Adds a log.
+
+<mark style="color:purple;">`void`</mark> `print(`<mark style="color:green;">`args`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Does the same thing as log add.
+
+<mark style="color:purple;">`log`</mark> `clear()` -> <mark style="color:purple;">void</mark>
+
+Clears all the logs.
+
+<mark style="color:purple;">`log`</mark> `notification(`<mark style="color:green;">`message`</mark>, <mark style="color:green;">`type`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Description</th><th data-hidden>Description</th></tr></thead><tbody><tr><td>message</td><td><mark style="color:green;"><code>string</code></mark></td><td>The notification text</td><td>What you want to log</td></tr><tr><td>type</td><td><mark style="color:green;"><code>string</code></mark></td><td>Optional type (info, warning, success)</td><td></td></tr></tbody></table>
+
+## Example
+
+```lua
+log.add("message 1", color(1, 1, 0, 1))
+
+print("message 2")
+
+log.notification("message 3", "info")
+
+wait(5000)
+
+log.clear()
+```
