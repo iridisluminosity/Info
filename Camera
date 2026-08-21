@@ -1,0 +1,46 @@
+# camera
+
+<mark style="color:purple;">`instance`</mark> `set_camera_position(`<mark style="color:green;">`vector3`</mark>, <mark style="color:green;">`smootness`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the camera lookat position
+
+<mark style="color:purple;">`instance`</mark> `camera_position` -> <mark style="color:purple;">vector3</mark>
+
+Gets the camera position.
+
+<mark style="color:purple;">`instance`</mark> `camera_subject` -> <mark style="color:purple;">instance</mark>
+
+Gets the camera subject instance.
+
+<mark style="color:purple;">`instance`</mark> `camera_lookvector` -> <mark style="color:purple;">vector3</mark>
+
+Gets the camera lookvector.
+
+<mark style="color:purple;">`instance`</mark> `fov` -> <mark style="color:purple;">int</mark>
+
+Gets the fov on the camera.
+
+<mark style="color:purple;">`instance`</mark> `set_fov()` -> <mark style="color:purple;">void</mark>
+
+Sets the fov on the camera. (0 - 180)
+
+<mark style="color:purple;">instance</mark> `get_camera_type()`-> <mark style="color:purple;">camera\_type</mark>
+
+Gets the [camera type](/api/documentation/roblox/camera/camera-type.md), (`scriptable`, `orbital`, `...`)
+
+## Example
+
+```lua
+local workspace = game:get_service("Workspace")
+local camera = workspace:find_first_child_class("Camera")
+local camera_subject = camera.camera_subject
+
+print(camera_subject.name .. " - " .. camera_subject.class_name)
+
+local camera_position = camera.camera_position
+print(camera_position.x, camera_position.y, camera_position.z)
+print(camera.fov)
+
+camera:set_camera_position(vector3(0,0,0), 0.5) -- Goes half way
+camera:set_fov(120)
+```
