@@ -1,0 +1,136 @@
+# memory
+
+* This is work in progress, any issues with the functions contact me.
+* Current write types, <mark style="color:$warning;">INSTANCE ONLY</mark>(`MEMORY_FLOAT`, `MEMORY_INT`, `MEMORY_BOOL`, `MEMORY_DOUBLE`, `MEMORY_VECTOR3`, `MEMORY_VECTOR2`)
+* Current read types, <mark style="color:$warning;">INSTANCE ONLY</mark>(`MEMORY_FLOAT`, `MEMORY_INT`, `MEMORY_BOOL`, `MEMORY_DOUBLE`, `MEMORY_VECTOR3`, `MEMORY_VECTOR2`,  `MEMORY_POINTER`,  `MEMORY_STRING`)
+
+<mark style="color:purple;">`instance`</mark> `write_memory(`<mark style="color:green;">`offset`</mark>, <mark style="color:green;">`type`</mark>, <mark style="color:green;">`value`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Writes the value to the address.
+
+| Name     | Type                                            | Description                |
+| -------- | ----------------------------------------------- | -------------------------- |
+| `offset` | <mark style="color:green;">`hex`</mark>         | Where it points to.        |
+| `type`   | <mark style="color:green;">`string`</mark>      | Value type.                |
+| `value`  | <mark style="color:green;">`number/bool`</mark> | What it writes the memory. |
+
+<mark style="color:purple;">`instance`</mark> `read_memory(`<mark style="color:green;">`offset`</mark>, <mark style="color:green;">`type`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Returns the value stored in the address.
+
+<mark style="color:purple;">`instance`</mark> `read_string(`<mark style="color:green;">`offset`</mark>, <mark style="color:green;">`size`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Returns the string stored in the address.
+
+<mark style="color:purple;">`instance`</mark> `write_string(`<mark style="color:green;">`offset`</mark>, <mark style="color:green;">`string`</mark>,  <mark style="color:green;">`size`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Overwrites current string stored in the address.
+
+<mark style="color:purple;">`void`</mark> `game_baseaddress()` -> <mark style="color:purple;">instance</mark>
+
+Returns the game base address.
+
+<mark style="color:purple;">`void`</mark> `get_renderview()` -> <mark style="color:purple;">instance</mark>
+
+Returns the RenderView address.
+
+<mark style="color:purple;">`void`</mark> `get_visualengine()` -> <mark style="color:purple;">instance</mark>
+
+Returns the VisualEngine address.
+
+## Example
+
+<pre class="language-lua"><code class="lang-lua">-- Roblox version: version-8aa36bbf0eb1494a
+
+local game_name_ptr = game:read_memory(0x68, MEMORY_POINTER)
+local name_string = game_name_ptr:read_memory(0x0, MEMORY_STRING)
+print(name_string)
+-- if the string in the memory is over 16+ it will be stored in a pointer.
+
+<strong>local players = game:get_service("Players")
+</strong>local local_plr = players.local_player.character
+local humanoidrootpart = local_plr:find_first_child("HumanoidRootPart")
+local humanoid = local_plr:find_first_child("Humanoid")
+
+humanoid:write_memory(0x1C8, MEMORY_FLOAT, 200) -- walkspeed
+humanoid:write_memory(0x3A0, MEMORY_FLOAT, 200) -- walkspeed check
+
+local position_ptr = humanoidrootpart:read_memory(0x160, MEMORY_POINTER)
+local root_pos = position_ptr:read_memory(0x140, MEMORY_VECTOR3) -- position
+-- the x, y, z floats are 0x4 offset away from eachother.
+print(root_pos.x, root_pos.y, root_pos.z)
+
+local lightning = game:get_service("Lighting")
+lightning:write_memory(0x128, MEMORY_FLOAT, 200) -- fog end
+</code></pre>
+
+## Raw memory
+
+<mark style="color:purple;">`void`</mark> `memory.read(`<mark style="color:green;">`address`</mark>, <mark style="color:green;">`type`</mark>`)` -> <mark style="color:purple;">value</mark>
+
+Reads a value from absolute memory address.
+
+```lua
+local value = memory.read(0x12345678, MEMORY_TYPE.int32)
+local ptr = memory.read(0x12345678, MEMORY_TYPE.ptr)
+local vec3 = memory.read(0x12345678, MEMORY_TYPE.vector3)
+```
+
+<mark style="color:purple;">`void`</mark> `memory.write(`<mark style="color:green;">`address`</mark>, <mark style="color:green;">`type`</mark>, <mark style="color:green;">`value`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Writes a value to absolute memory address.
+
+```lua
+memory.write(0x12345678, MEMORY_TYPE.int32, 42)
+memory.write(0x12345678, MEMORY_TYPE.float, 3.14)
+memory.write(0x12345678, MEMORY_TYPE.vector3, vector3(1, 2, 3))
+```
+
+<mark style="color:purple;">`void`</mark> `memory.read_pointer(`<mark style="color:green;">`address`</mark>`)` -> <mark style="color:purple;">int64</mark>
+
+Reads a 64-bit pointer from memory.
+
+```lua
+local ptr = memory.read_pointer(0x12345678)
+local value = memory.read(ptr + 0x20, MEMORY_TYPE.float)
+```
+
+<mark style="color:purple;">`void`</mark> `memory.write_pointer(`<mark style="color:green;">`address`</mark>, <mark style="color:green;">`pointer`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Writes a 64-bit pointer to memory.
+
+```lua
+memory.write_pointer(0x12345678, 0x87654321)
+```
+
+## Raw memory types
+
+```lua
+MEMORY_TYPE.int8       -- 8-bit signed integer
+MEMORY_TYPE.int16      -- 16-bit signed integer
+MEMORY_TYPE.int32      -- 32-bit signed integer
+MEMORY_TYPE.int64      -- 64-bit signed integer
+MEMORY_TYPE.uint8      -- 8-bit unsigned integer
+MEMORY_TYPE.uint16     -- 16-bit unsigned integer
+MEMORY_TYPE.uint32     -- 32-bit unsigned integer
+MEMORY_TYPE.uint64     -- 64-bit unsigned integer
+MEMORY_TYPE.float      -- Single precision float
+MEMORY_TYPE.double     -- Double precision float
+MEMORY_TYPE.ptr        -- 64-bit pointer
+MEMORY_TYPE.vector2    -- 2D vector (2x float)
+MEMORY_TYPE.vector3    -- 3D vector (3x float)
+MEMORY_TYPE.vector4    -- 4D vector (4x float)
+MEMORY_TYPE.bool       -- Boolean
+```
+
+## How to start
+
+<div align="left"><figure><img src="/files/l20zfwK3N5WtknMl4Ap5" alt=""><figcaption></figcaption></figure></div>
+
+To get started you need to use a software to analyze the memory, I would recommend re-class.
+
+To reach the address, use the dex feature to copy the identity, which is the address.
+
+If you want learn more about using re-class you can check it out here [here](https://www.unknowncheats.me/forum/league-of-legends/423786-reclass.html) or [here](https://www.youtube.com/watch?v=vQb21RM9-5M\&t=1s). Credits to the authors.
+
+<figure><img src="/files/wCtE6MCuim9DRQl6DFWK" alt=""><figcaption></figcaption></figure>
