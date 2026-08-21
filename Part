@@ -1,0 +1,213 @@
+# part
+
+<mark style="color:purple;">`instance`</mark> `shape` -> <mark style="color:purple;">shape\_type</mark>
+
+Gets the shape of the part.
+
+<mark style="color:purple;">`instance`</mark> `position` -> <mark style="color:purple;">vector3</mark>
+
+Gets the position of the part.
+
+<mark style="color:purple;">`instance`</mark> `set_position(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets part position of the part.
+
+<mark style="color:purple;">`instance`</mark> `cframe_position` -> <mark style="color:purple;">vector3</mark>
+
+Gets the position of the part.
+
+<mark style="color:purple;">`instance`</mark> `set_cframe_position(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the cframe position of the part.
+
+<mark style="color:purple;">`instance`</mark> `cframe_angle` -> <mark style="color:purple;">vector3</mark>
+
+Gets the cframe angle of the part.
+
+<mark style="color:purple;">`instance`</mark> `set_cframe_angle(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the cframe angle of the part.
+
+* Cframe angle will use degrees so 1 to 360.
+
+<mark style="color:purple;">`instance`</mark> `cframe_lookvector` -> <mark style="color:purple;">vector3</mark>
+
+Gets the cframe lookvector of the part.
+
+<mark style="color:purple;">`instance`</mark> `set_cframe_lookvector(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the cframe lookvector of the part.
+
+<mark style="color:purple;">`instance`</mark> `cframe_rightvector` -> <mark style="color:purple;">vector3</mark>
+
+Gets the cframe rightvector of the part.
+
+<mark style="color:purple;">`instance`</mark> `cframe_upvector` -> <mark style="color:purple;">vector3</mark>
+
+Gets the cframe upvector of the part.
+
+<mark style="color:purple;">`instance`</mark> `velocity` -> <mark style="color:purple;">vector3</mark>
+
+Gets the velocity of the part.
+
+<mark style="color:purple;">`instance`</mark> `set_velocity(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets part velocity of the part.
+
+<mark style="color:purple;">`instance`</mark> `linear_velocity` -> <mark style="color:purple;">vector3</mark>
+
+Gets the assemblylinearvelocity of the part.
+
+<mark style="color:purple;">`instance`</mark> `set_linear_velocity(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets part assemblylinearvelocity of the part.
+
+<mark style="color:purple;">`instance`</mark> `size` -> <mark style="color:purple;">vector3</mark>
+
+Gets the size of the part.
+
+<mark style="color:purple;">`instance`</mark> `set_size(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the size of the part.
+
+<mark style="color:purple;">`instance`</mark> `collision` -> <mark style="color:purple;">bool</mark>
+
+Gets the position state of the part.
+
+<mark style="color:purple;">`instance`</mark> `set_collision(`<mark style="color:green;">`bool`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the collision of the part.
+
+<mark style="color:purple;">`instance`</mark> `transparency` -> <mark style="color:purple;">float</mark>
+
+Gets the transparency of the part.
+
+<mark style="color:purple;">`instance`</mark> `set_transparency(`<mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the transparency of the part.
+
+<mark style="color:purple;">`instance`</mark> `reflectance`-> <mark style="color:purple;">float</mark>
+
+Gets the reflectance of the part.
+
+<mark style="color:purple;">`instance`</mark> `spectate()` -> <mark style="color:purple;">void</mark>
+
+Sets your camera target to the instance.
+
+<mark style="color:purple;">`instance`</mark> `color` -> <mark style="color:purple;">color</mark>
+
+Gets the color of the part.
+
+<mark style="color:purple;">`instance`</mark> `set_color(`<mark style="color:green;">`color`</mark>`)` -> <mark style="color:purple;">color</mark>
+
+Sets the part color.
+
+<mark style="color:purple;">`instance`</mark> `material` -> <mark style="color:purple;">material\_type enum</mark>
+
+Gets the [material type](/api/documentation/roblox/part/material-type.md) of the part. Example (`wood`, `plastic`, `forcefield`, `...`)
+
+<mark style="color:purple;">`instance`</mark> `set_material(`<mark style="color:green;">`material_type`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the material of the part.
+
+<mark style="color:purple;">`instance`</mark> `anchored` -> <mark style="color:purple;">bool</mark>
+
+Returns if the object is anchored. Anchored determines whether the part will be immovable by physics.
+
+<mark style="color:purple;">`instance`</mark> `set_anchored(`<mark style="color:green;">`bool`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the the anchored property.
+
+<mark style="color:purple;">`instance`</mark> `get_primitive()` -> <mark style="color:purple;">instance</mark>
+
+Gets the primitive pointer. stores position, size, etc. Use the [memory](/api/documentation/roblox/memory.md) to access or manipulate this data.
+
+<mark style="color:purple;">`instance`</mark> `get_meshpart_id()` -> <mark style="color:purple;">string</mark>
+
+Gets the mesh part id.
+
+<mark style="color:purple;">`instance`</mark> `apply_chams(`<mark style="color:green;">`color`</mark><mark style="color:$primary;">,</mark> <mark style="color:green;">`always_ontop`</mark><mark style="color:$primary;">,</mark> <mark style="color:green;">`wireframe`</mark><mark style="color:$primary;">,</mark> <mark style="color:green;">`wireframe_texture`</mark><mark style="color:$primary;">,</mark> <mark style="color:green;">`glow`</mark><mark style="color:$primary;">,</mark> <mark style="color:green;">`visible_textures`</mark><mark style="color:$primary;">,</mark> <mark style="color:green;">`is_playerpart`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets parts rendering settings.
+
+* Current color types (`CHAMS_RED`, `CHAMS_GREEN`, `CHAMS_YELLOW`, `CHAMS_BLUE`, `CHAMS_PINK`, `CHAMS_CYAN`,  `CHAMS_WHITE`)
+
+| Name               | Type                                     | Description                                                 |
+| ------------------ | ---------------------------------------- | ----------------------------------------------------------- |
+| color              | <mark style="color:green;">`int`</mark>  | Color type from CHAMS\_...                                  |
+| always\_ontop      | <mark style="color:green;">`bool`</mark> | Renders through parts etc.                                  |
+| wireframe          | <mark style="color:green;">`bool`</mark> | Self explanatory                                            |
+| wireframe\_texture | <mark style="color:green;">`bool`</mark> | Self explanatory                                            |
+| glow               | <mark style="color:green;">`bool`</mark> | Makes it glow                                               |
+| visible\_textures  | <mark style="color:green;">`bool`</mark> | Makes the part not see through                              |
+| is\_playerpart     | <mark style="color:green;">`bool`</mark> | Needs to be true if the characters parent is the character. |
+
+<mark style="color:purple;">`instance`</mark> `reset_chams()` -> <mark style="color:purple;">void</mark>
+
+Resets the part to its origin render settings.
+
+## Example
+
+<pre class="language-lua"><code class="lang-lua">local workspace = game:get_service("Workspace")
+local players = game:get_service("Players")
+local localplayer = players.local_player
+
+local stored_parts = {}
+
+for _, v in pairs(workspace:get_children()) do
+    if v.class_name == "Part" then
+       local part_position = v.position
+       local part_size = v.size
+       
+       print(v.name)
+       print(v.transparency)
+       print(tostring(v.collision))
+       print(part_size.x, part_size.y, part_size.z)
+       print(part_position.x, part_position.y, part_position.z)
+       print("-")
+       
+       table.insert(stored_parts, v)
+    end
+end -- gets every parts in workspace and prints out specific properties
+
+local local_character = localplayer.character
+if local_character:isvalid() then -- checks if the instance is not invalid
+<strong>   for _, v in pairs(local_character:get_children()) do
+</strong>      if v.class_name == "MeshPart" or v.class_name == "Part" then
+         v:set_collision(false)
+      end
+   end
+end -- basic noclip
+
+if local_character:isvalid() then
+   local rootpart = local_character:find_first_child("HumanoidRootPart")
+   if rootpart:isvalid() then
+      local angle = rootpart.cframe_angle
+      print(angle.x, angle.y, angle.z)
+      
+      rootpart:set_velocity(vector3(0, 50, 0))
+   end
+end -- flings you upp a little
+
+local random_index = math.random(1, #stored_parts)
+local random_part = stored_parts[random_index]
+random_part:spectate() -- spectates a random part in workspace
+-- local characters humanoid is the default camera subject
+
+if local_character.material == material_type.PLASTIC then
+   print("humanoidrootpart = plastic!")
+end
+
+-- chams example
+local head = localplayer.character:find_first_child("Head")
+
+head:apply_chams(
+    CHAMS_RED, -- Color
+    true, -- Always on top
+    false, -- Wireframe
+    false, -- Wireframe textured
+    true, -- Glow
+    true, -- Visible textures
+    true -- Is player part
+)
+</code></pre>
