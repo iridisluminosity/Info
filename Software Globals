@@ -1,0 +1,125 @@
+# globals
+
+<mark style="color:purple;">`void`</mark> `world_to_screen(`<mark style="color:green;">`world_pos`</mark>`)` -> <mark style="color:purple;">vector2</mark>
+
+Returns the screen position vector.
+
+| Name       | Type                                        | Description     |
+| ---------- | ------------------------------------------- | --------------- |
+| world\_pos | <mark style="color:green;">`vector3`</mark> | World position. |
+
+&#x20;
+
+<mark style="color:purple;">`void`</mark> `in_screen(`<mark style="color:green;">`screen_pos`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+Checks if screen position is in inside the screen.
+
+> Consider using the `out_of_screen` vector2 function instead.
+
+| Name        | Type                                        | Description                |
+| ----------- | ------------------------------------------- | -------------------------- |
+| screen\_pos | <mark style="color:green;">`vector2`</mark> | 2D position in your screen |
+
+<mark style="color:purple;">`void`</mark> `run_string(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Evaluates and executes the given code.
+
+<mark style="color:purple;">`void`</mark> `get_eye_angle()` -> <mark style="color:purple;">vector3</mark>
+
+Returns your eye angles of the camera angle.
+
+<mark style="color:purple;">`void`</mark> `playsound(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Plays a sound, only supports `wav` files. Path is relative to photon\data.
+
+<mark style="color:purple;">`void`</mark> `get_tickcount()` -> <mark style="color:purple;">uint64</mark>
+
+Returns the number of milliseconds that have elapsed since the system was started.
+
+<mark style="color:purple;">`void`</mark> `menu_active()` -> <mark style="color:purple;">bool</mark>
+
+Returns true if menu is open.
+
+<mark style="color:purple;">`void`</mark> `is_aimbotting()` -> <mark style="color:purple;">bool</mark>
+
+Returns true if you are aimbotting.
+
+<mark style="color:purple;">`void`</mark> `get_aimbottarget()` -> <mark style="color:purple;">instance</mark>
+
+Returns the instance of the aimbot target.
+
+<mark style="color:purple;">`void`</mark> `is_gamefocused()` -> <mark style="color:purple;">bool</mark>
+
+Returns true if roblox or menu is active.
+
+<mark style="color:purple;">`void`</mark> `get_unixtime()` -> <mark style="color:purple;">instance</mark>
+
+Returns unix current time.
+
+<mark style="color:purple;">`void`</mark> `JSON_to_table(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">table</mark>
+
+Converts the json string and converts data to table.
+
+| Name | Type                                       | Description          |
+| ---- | ------------------------------------------ | -------------------- |
+| text | <mark style="color:green;">`string`</mark> | JSON formatted data. |
+
+&#x20;
+
+<mark style="color:purple;">`void`</mark> `table_to_JSON(`<mark style="color:green;">`table`</mark>`)` -> <mark style="color:purple;">string</mark>
+
+Takes table data and converts it into a JSON formatted string.
+
+| Name  | Type                                      | Description |
+| ----- | ----------------------------------------- | ----------- |
+| `tbl` | <mark style="color:green;">`table`</mark> | lua table   |
+
+<mark style="color:purple;">`void`</mark> `get_hwid()` -> <mark style="color:purple;">string</mark>
+
+Returns the serialized hwid of the computer.
+
+<mark style="color:purple;">`void`</mark> `wait(`<mark style="color:green;">`int`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Stops the thread for amount of milliseconds.
+
+<mark style="color:purple;">`void`</mark> `spawn(`<mark style="color:green;">`function`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Creates a thread for the function.
+
+<mark style="color:purple;">`void`</mark> `keybind_active(`<mark style="color:green;">`name`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+Returns true if the keybind is toggled
+
+* Available keybinds.
+* `menu, silent, flickbot, macro, triggerbot`
+* `aimbot, noclip, cframe, fly, underground, reverse`
+
+<mark style="color:purple;">`void`</mark> `uninject()` -> <mark style="color:purple;">void</mark>
+
+Uninjects the cheat.
+
+## Example
+
+```lua
+local position = vector3(0, 5, 0)
+local name = getusername()
+print(name)
+
+hook.add("render", "hook example", function()
+    local screen_pos = world_to_screen(position)
+    
+    if in_screen(screen_pos) then
+        render.add_text(screen_pos, "Hello", color(1, 1, 1, 1))
+    end
+end)
+
+_G.test = 100
+
+run_string("print(_G.test)")
+
+print(function() end)
+print({hello = {"world"}})
+print(1, 1.123)
+print("hello", "world")
+print(nil)
+```
