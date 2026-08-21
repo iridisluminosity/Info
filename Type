@@ -1,0 +1,143 @@
+# type
+
+<mark style="color:purple;">`void`</mark> `color(`<mark style="color:green;">`r`</mark>, <mark style="color:green;">`g`</mark>, <mark style="color:green;">`b`</mark>, <mark style="color:green;">`a`</mark>`)`
+
+| Name | Type                                      | Description |
+| ---- | ----------------------------------------- | ----------- |
+| r    | <mark style="color:green;">`float`</mark> | value 0 - 1 |
+| g    | <mark style="color:green;">`float`</mark> | value 0 - 1 |
+| b    | <mark style="color:green;">`float`</mark> | value 0 - 1 |
+| a    | <mark style="color:green;">`float`</mark> | value 0 - 1 |
+
+<mark style="color:purple;">`var`</mark> `COLOR_WHITE` -> `color(1, 1, 1, 1)`
+
+<mark style="color:purple;">`var`</mark> `COLOR_BLACK` -> `color(0, 0, 0, 1)`
+
+<mark style="color:purple;">`var`</mark> `COLOR_RED` -> `color(1, 0, 0, 1)`
+
+<mark style="color:purple;">`var`</mark> `COLOR_GREEN` -> `color(0, 1, 0, 1)`
+
+<mark style="color:purple;">`var`</mark> `COLOR_BLUE` -> `color(0, 0, 1, 1)`
+
+<mark style="color:purple;">`void`</mark> `vector2(`<mark style="color:green;">`x`</mark>, <mark style="color:green;">`y`</mark>`)`
+
+| Name | Type                                      |
+| ---- | ----------------------------------------- |
+| x    | <mark style="color:green;">`float`</mark> |
+| y    | <mark style="color:green;">`float`</mark> |
+
+<mark style="color:purple;">`void`</mark> `vector3(`<mark style="color:green;">`x`</mark>, <mark style="color:green;">`y`</mark>, <mark style="color:green;">`z`</mark>`)`
+
+| Name | Type                                      |
+| ---- | ----------------------------------------- |
+| x    | <mark style="color:green;">`float`</mark> |
+| y    | <mark style="color:green;">`float`</mark> |
+| z    | <mark style="color:green;">`float`</mark> |
+
+* vector2 functions
+
+<mark style="color:purple;">`vector2`</mark> `add(`<mark style="color:green;">`vector2`</mark>`)` -> <mark style="color:purple;">vector2</mark>
+
+<mark style="color:purple;">`vector2`</mark> `subtract(`<mark style="color:green;">`vector2`</mark>`)` -> <mark style="color:purple;">vector2</mark>
+
+<mark style="color:purple;">`vector2`</mark> `multiply_scalar(`<mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">vector2</mark>
+
+<mark style="color:purple;">`vector2`</mark> `multiply_vector(`<mark style="color:green;">`vector2`</mark>`)` -> <mark style="color:purple;">vector2</mark>
+
+<mark style="color:purple;">`vector2`</mark> `divide_scalar(`<mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">vector2</mark>
+
+<mark style="color:purple;">`vector2`</mark> `divide_vector(`<mark style="color:green;">`vector2`</mark>`)` -> <mark style="color:purple;">vector2</mark>
+
+<mark style="color:purple;">`vector2`</mark> `divide_vector(`<mark style="color:green;">`vector2`</mark>`)` -> <mark style="color:purple;">vector2</mark>
+
+<mark style="color:purple;">`vector2`</mark> `length()` -> <mark style="color:purple;">float</mark>
+
+<mark style="color:purple;">`vector2`</mark> `distance(`<mark style="color:green;">`vector2`</mark>`)` -> <mark style="color:purple;">float</mark>
+
+<mark style="color:purple;">`vector2`</mark> `out_of_screen(`<mark style="color:green;">`vector2`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+<mark style="color:purple;">`vector2`</mark> `lerp(`<mark style="color:green;">`vector2`</mark>, <mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">vector2</mark>
+
+<mark style="color:purple;">`vector2`</mark> `unpack()` -> <mark style="color:purple;">table</mark>
+
+<mark style="color:purple;">`vector2`</mark> `type()` -> <mark style="color:purple;">string</mark>
+
+* vector3 functions
+
+<mark style="color:purple;">`vector3`</mark> `add(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">vector3</mark>
+
+<mark style="color:purple;">`vector3`</mark> `subtract(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">vector3</mark>
+
+<mark style="color:purple;">`vector3`</mark> `multiply_scalar(`<mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">vector3</mark>
+
+<mark style="color:purple;">`vector3`</mark> `multiply_vector(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">vector3</mark>
+
+<mark style="color:purple;">`vector3`</mark> `divide_scalar(`<mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">vector3</mark>
+
+<mark style="color:purple;">`vector3`</mark> `divide_vector(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">vector3</mark>
+
+<mark style="color:purple;">`vector3`</mark> `divide_vector(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">vector3</mark>
+
+<mark style="color:purple;">`vector3`</mark> `length()` -> <mark style="color:purple;">float</mark>
+
+<mark style="color:purple;">`vector3`</mark> `distance(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">float</mark>
+
+<mark style="color:purple;">`vector3`</mark> `unit()` -> <mark style="color:purple;">vector3</mark>
+
+<mark style="color:purple;">`vector3`</mark> `normalize()` -> <mark style="color:purple;">vector3</mark>
+
+<mark style="color:purple;">`vector3`</mark> `cross_product(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">vector3</mark>
+
+<mark style="color:purple;">`vector3`</mark> `look_vector(`<mark style="color:green;">`vector3`</mark>`)` -> <mark style="color:purple;">vector3</mark>
+
+<mark style="color:purple;">`vector3`</mark> `is_zero()` -> <mark style="color:purple;">bool</mark>
+
+<mark style="color:purple;">`vector3`</mark> `lerp(`<mark style="color:green;">`vector3`</mark>, <mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">vector3</mark>
+
+<mark style="color:purple;">`vector3`</mark> `unpack()` -> <mark style="color:purple;">table</mark>
+
+<mark style="color:purple;">`vector3`</mark> `type()` -> <mark style="color:purple;">string</mark>
+
+* color functions
+
+<mark style="color:purple;">`color`</mark> `hex(`<mark style="color:green;">`uint32_T`</mark>`)` -> <mark style="color:purple;">color</mark>
+
+<mark style="color:purple;">`color`</mark> `int(`<mark style="color:green;">`int`</mark>, <mark style="color:green;">`int`</mark>, <mark style="color:green;">`int`</mark>, <mark style="color:green;">`int`</mark>`)` -> <mark style="color:purple;">color</mark>
+
+<mark style="color:purple;">`color`</mark> `to_hex()` -> <mark style="color:purple;">uint32\_t</mark>
+
+<mark style="color:purple;">`color`</mark> `to_hex_string()` -> <mark style="color:purple;">string</mark>
+
+<mark style="color:purple;">`color`</mark> `unpack()` -> <mark style="color:purple;">table</mark>
+
+<mark style="color:purple;">`color`</mark> `type()` -> <mark style="color:purple;">string</mark>
+
+## Example
+
+```lua
+local white_color = color(1, 1, 1, 1)
+local white_color_1 = color():int(255, 255, 255, 255)
+local white_color_2 = color():hex(0xffffff)
+
+print(white_color_1.r, white_color_1.g, white_color_1.b)
+print(white_color_2:to_hex_string())
+local t = white_color_1:unpack()
+print(t.r, t.g, t.b, t.a)
+
+local r_vector = vector3(1, 1, 1) + vector3(1, 1, 1)
+print(r_vector.x, r_vector.y, r_vector.z)
+
+local added_vector = r_vector:add(vector3(1, 1, 1)) -- result 3, 3, 3
+
+local distance = r_vector:distance(added_vector)
+print(distance)
+
+local subtracted_vector = r_vector:subtract(vector3(1, 1, 1))
+print(tostring(subtracted_vector:is_zero()))
+
+local length = r_vector:length()
+local unit = r_vector:unit()
+print(length)
+print(unit.x, unit.y, unit.z)
+
+```
