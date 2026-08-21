@@ -1,0 +1,200 @@
+# gui
+
+<mark style="color:purple;">`gui`</mark> `create(`<mark style="color:green;">`name`</mark>, <mark style="color:green;">`force_open`</mark>`)` -> <mark style="color:purple;">menu</mark>
+
+| Name        | Type                                       | Description                         |
+| ----------- | ------------------------------------------ | ----------------------------------- |
+| name        | <mark style="color:green;">`string`</mark> | Window title                        |
+| force\_open | <mark style="color:green;">`bool`</mark>   | Still open when menu is not drawing |
+
+<mark style="color:purple;">`gui`</mark> `remove(`<mark style="color:green;">`name`</mark>`)` -> <mark style="color:purple;">menu</mark>
+
+Removes the specific windows title.
+
+<mark style="color:purple;">`menu`</mark> `set_pos(`<mark style="color:green;">`X`</mark>, <mark style="color:green;">`Y`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the position of the menu, Can be set constantly.
+
+<mark style="color:purple;">`menu`</mark> `set_size(`<mark style="color:green;">`X`</mark>, <mark style="color:green;">`Y`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the size of the menu, Can be set constantly.
+
+<mark style="color:purple;">`menu`</mark> `add_button(`<mark style="color:green;">`name`</mark>, <mark style="color:green;">`callback`</mark>`)` -> <mark style="color:purple;">button\_struct</mark>
+
+Adds the button to the specific menu. Callback will be called when its been pressed.
+
+<mark style="color:purple;">`menu`</mark> `add_textbox(`<mark style="color:green;">`name`</mark>`)` -> <mark style="color:purple;">textbox\_struct</mark>
+
+Adds a textbox to the menu for user input.
+
+<mark style="color:purple;">`menu`</mark> `add_slider(`<mark style="color:green;">`name`</mark>, <mark style="color:green;">`min`</mark>, <mark style="color:green;">`max`</mark>, <mark style="color:green;">`initial_value`</mark>`)` -> <mark style="color:purple;">slider\_struct</mark>
+
+| Name           | Type                                       | Description                                           |
+| -------------- | ------------------------------------------ | ----------------------------------------------------- |
+| name           | <mark style="color:green;">`string`</mark> | The display label of the slider.                      |
+| min            | <mark style="color:green;">`float`</mark>  | The minimum value of the slider.                      |
+| max            | <mark style="color:green;">`float`</mark>  | The maximum value of the slider.                      |
+| initial\_value | <mark style="color:green;">`float`</mark>  | The initial value of the slider, What it starts from. |
+
+<mark style="color:purple;">`menu`</mark> `add_combo(`<mark style="color:green;">`name`</mark>, <mark style="color:green;">`options`</mark>, <mark style="color:green;">`initial_index`</mark>`)` -> <mark style="color:purple;">combo\_struct</mark>
+
+| Name           | Type                                       | Description                                           |
+| -------------- | ------------------------------------------ | ----------------------------------------------------- |
+| name           | <mark style="color:green;">`string`</mark> | The display label of the combo box.                   |
+| options        | <mark style="color:green;">`table`</mark>  | A list of string options.                             |
+| initial\_index | <mark style="color:green;">`int`</mark>    | The index of the initially selected option (0-based). |
+
+<mark style="color:purple;">`menu`</mark> `add_multicombo(`<mark style="color:green;">`name`</mark>, <mark style="color:green;">`options`</mark>, <mark style="color:green;">`initial_selected`</mark>`)` -> <mark style="color:purple;">combo\_struct</mark>
+
+| Name              | Type                                       | Description                                           |
+| ----------------- | ------------------------------------------ | ----------------------------------------------------- |
+| name              | <mark style="color:green;">`string`</mark> | The display label of the combo box.                   |
+| options           | <mark style="color:green;">`table`</mark>  | A list of string options.                             |
+| initial\_selected | <mark style="color:green;">`table`</mark>  | The index of the initially selected option (0-based). |
+
+<mark style="color:purple;">`menu`</mark> `add_checkbox(`<mark style="color:green;">`name`</mark>, <mark style="color:green;">`initial_value`</mark>`)` -> <mark style="color:purple;">checkbox\_struct</mark>
+
+| Name           | Type                                       | Description                                            |
+| -------------- | ------------------------------------------ | ------------------------------------------------------ |
+| name           | <mark style="color:green;">`string`</mark> | The display label of the check box.                    |
+| initial\_value | <mark style="color:green;">`bool`</mark>   | The initial value of the checkbox (`true` or `false`). |
+
+<mark style="color:purple;">`menu`</mark> `add_label(`<mark style="color:green;">`text`</mark>`)` -> <mark style="color:purple;">label\_struct</mark>
+
+| Name | Type                                       | Description       |
+| ---- | ------------------------------------------ | ----------------- |
+| text | <mark style="color:green;">`string`</mark> | The text display. |
+
+<mark style="color:purple;">`menu`</mark> `add_keybind(`<mark style="color:green;">`id`</mark>, <mark style="color:green;">`keycode`</mark>`)` -> <mark style="color:purple;">label\_struct</mark>
+
+| Name    | Type                                       | Description                                                                                   |
+| ------- | ------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| id      | <mark style="color:green;">`string`</mark> | The id.                                                                                       |
+| keycode | <mark style="color:green;">`int`</mark>    | [virtual keycode](https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes) |
+
+<mark style="color:purple;">`label_struct`</mark> `set_label(`<mark style="color:green;">`label`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets a new label.
+
+<mark style="color:purple;">`struct`</mark> `get_state()` -> <mark style="color:purple;">bool</mark>
+
+Returns the current state from the structure, This can only be used on `keybind_struct`.
+
+<mark style="color:purple;">`menu`</mark> `add_color(`<mark style="color:green;">`name`</mark>, <mark style="color:green;">`color`</mark>`)` -> <mark style="color:purple;">color\_struct</mark>
+
+Self explanatory.
+
+<mark style="color:purple;">`struct`</mark>  `change_callback(`<mark style="color:green;">`callback`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+This can used for every struct except `button_struct`.
+
+<mark style="color:purple;">`struct`</mark> `get_value()` -> <mark style="color:purple;">value\_type</mark>
+
+Returns the value from the structure. This cannot be used on `textbox_struct`, `color_struct`, `button_struct`.
+
+`checkbox_struct` `bool`
+
+`slider_struct` `float`
+
+`combo_struct` `int`
+
+<mark style="color:purple;">`struct`</mark> `get_text()` -> <mark style="color:purple;">string</mark>
+
+Returns the current string from the structure, This can only be used on `combo_struct`, `textbox_struct`.
+
+<mark style="color:purple;">`struct`</mark> `get_color()` -> <mark style="color:purple;">color</mark>
+
+Returns the current color from the structure, This can be only used on `color_struct`.
+
+***
+
+<mark style="color:purple;">`render`</mark> **`setvalue(`**<mark style="background-color:green;">**`menu`**</mark>**,&#x20;**<mark style="background-color:green;">**`label`**</mark>**,&#x20;**<mark style="color:green;">**`value`**</mark>**`)`** -> <mark style="color:purple;">void</mark>
+
+Sets the value of a widget inside a menu by its label.
+
+| Name  | Type                                                            |
+| ----- | --------------------------------------------------------------- |
+| menu  | <mark style="color:green;">`string`</mark>                      |
+| label | <mark style="color:green;">`string`</mark>                      |
+| value | <mark style="color:green;">`float / bool / int / string`</mark> |
+
+Supported widget types and accepted value types:
+
+| Widget   | Value type                                      |
+| -------- | ----------------------------------------------- |
+| slider   | <mark style="color:green;">`float`</mark>       |
+| checkbox | <mark style="color:green;">`bool`</mark>        |
+| combo    | <mark style="color:green;">`int`</mark> (index) |
+| textbox  | <mark style="color:green;">`string`</mark>      |
+
+***
+
+<mark style="color:purple;">`render`</mark> **`getvalue(`**<mark style="color:green;">**`menu`**</mark>**,&#x20;**<mark style="color:green;">**`label`**</mark>**`)` ->&#x20;**<mark style="color:purple;">**float / bool / int / string / nil**</mark>&#x20;
+
+Returns the current value of a widget inside a menu by its label.&#x20;
+
+Returns `nil` if the menu or widget is not found.
+
+| Name  | Type                                       |
+| ----- | ------------------------------------------ |
+| menu  | <mark style="color:green;">`string`</mark> |
+| label | <mark style="color:green;">`string`</mark> |
+
+## Example
+
+```lua
+local menu = gui.create("Example Menu", false)
+menu:set_pos(100, 100)
+menu:set_size(400, 300)
+
+local button = menu:add_button("Remove", function()
+    gui.remove("Example Menu")
+end)
+
+local checkbox = menu:add_checkbox("Enable Feature", false)
+checkbox:change_callback(function()
+    print("Checkbox:", checkbox:get_value())
+end)
+
+local textbox = menu:add_textbox("Enter Text")
+textbox:change_callback(function()
+    print("Textbox:", textbox:get_text())
+end)
+
+local slider = menu:add_slider("Adjust Value", 0, 100, 50)
+slider:change_callback(function()
+    print("Slider:", slider:get_value())
+end)
+ui.setvalue("Example Menu", "Adjust Value", 99)
+print("Slider new:", ui.getvalue("Example Menu", "Adjust Value"))
+
+local combo = menu:add_combo("Select Option", {"Option 1", "Option 2", "Option 3"}, 0)
+combo:change_callback(function()
+    print("Selected index:", combo:get_value())
+    print("Selected option:", combo:get_text())
+end)
+
+local col = menu:add_color("Color", color(1, 1, 1, 1))
+col:change_callback(function()
+    local saved = col:get_color()
+    print("Color:", saved.r, saved.g, saved.b, saved.a)
+end)
+
+local label = menu:add_label("test 123")
+label:set_label("test 321")
+
+local mc = menu:add_multicombo("Types", {"3","2","1"}, {1,3})
+mc:change_callback(function()
+    local list = mc:get_selected()
+    for _, v in pairs(list) do
+        print("list", v)
+    end
+end)
+
+local keybind = menu:add_keybind("Keybind", 0x48)
+print(keybind:get_state())
+```
+
+## Result
+
+<figure><img src="/files/aQ01OHdWhCGECbLp7M7b" alt=""><figcaption></figcaption></figure>
