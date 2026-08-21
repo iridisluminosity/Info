@@ -1,0 +1,87 @@
+# value
+
+* IntValue
+
+<mark style="color:purple;">`instance`</mark> `get_value_int()` -> <mark style="color:purple;">int</mark>
+
+Gets the int value of the instance.
+
+<mark style="color:purple;">`instance`</mark> `set_value_int(`<mark style="color:green;">`int`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the int value of the instance.
+
+* StringValue
+
+<mark style="color:purple;">`instance`</mark> `get_value_string()` -> <mark style="color:purple;">int</mark>
+
+Gets the string value of the instance.
+
+<mark style="color:purple;">`instance`</mark> `set_value_string(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the string of the instance.
+
+* Color3Value
+
+<mark style="color:purple;">`instance`</mark> `get_value_color()` -> <mark style="color:purple;">int</mark>
+
+Gets the color value of the instance.
+
+* NumberValue
+
+<mark style="color:purple;">`instance`</mark> `get_value_float()` -> <mark style="color:purple;">float</mark>
+
+Gets the float value of the instance.
+
+<mark style="color:purple;">`instance`</mark> `set_value_float(`<mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the float value of the instance.
+
+* BoolValue
+
+<mark style="color:purple;">`instance`</mark> `get_value_bool()` -> <mark style="color:purple;">bool</mark>
+
+Gets the bool of the boolvalue.
+
+<mark style="color:purple;">`instance`</mark> `set_value_bool(`<mark style="color:green;">`bool`</mark>`)`
+
+Sets the bool of the instance.
+
+* VectorValue
+
+<mark style="color:purple;">`instance`</mark> `get_value_vector()` <mark style="color:green;">`vector3`</mark>
+
+Gets the vector of the instance.
+
+<mark style="color:purple;">`instance`</mark> `set_value_vector(`<mark style="color:green;">`vector3`</mark>`)`
+
+Sets the vector of the instance.
+
+* ObjectValue
+
+<mark style="color:purple;">`instance`</mark> `get_value_object()` -> <mark style="color:purple;">instance</mark>
+
+* Misc
+
+<mark style="color:purple;">`instance`</mark> `get_value_double()` -> <mark style="color:purple;">double</mark>
+
+Gets the double value of the instance.
+
+<mark style="color:purple;">`instance`</mark> `set_value_double(`<mark style="color:green;">`double`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the double of the instance.
+
+## Example
+
+```lua
+local workspace = game:get_service("Workspace")
+
+local random_boolvalue = workspace:find_first_child_class("BoolValue")
+local random_vector3value = workspace:find_first_child_class("VectorValue")
+local random_intvalue = workspace:find_first_child_class("IntValue")
+local random_numbervalue = workspace:find_first_child_class("NumberValue")
+
+print(random_boolvalue:get_bool())
+print(random_vector3value:get_vector_value())
+print(random_intvalue:get_int_value())
+print(random_numbervalue:get_float_value())
+```
