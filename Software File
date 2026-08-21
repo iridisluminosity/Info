@@ -1,0 +1,53 @@
+# file
+
+<mark style="color:purple;">`file`</mark> `write(`<mark style="color:green;">`filepath`</mark>, <mark style="color:green;">`data`</mark>, <mark style="color:green;">`mode`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+| Name       | Type                                       | Description                                             |
+| ---------- | ------------------------------------------ | ------------------------------------------------------- |
+| `filepath` | <mark style="color:green;">`string`</mark> | The filepath name                                       |
+| `data`     | <mark style="color:green;">`string`</mark> | The data to the file.                                   |
+| `mode`     | <mark style="color:green;">`string`</mark> | -> <mark style="color:purple;">optional</mark> "binary" |
+
+<mark style="color:purple;">`file`</mark> `exists(`<mark style="color:green;">`filepath`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+Returns true if the filepath exists.
+
+<mark style="color:purple;">`file`</mark> `overwrite(`<mark style="color:green;">`filepath`</mark>, <mark style="color:green;">`data`</mark>, <mark style="color:green;">`mode`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+| Name       | Type                                       | Description                                             |
+| ---------- | ------------------------------------------ | ------------------------------------------------------- |
+| `filepath` | <mark style="color:green;">`string`</mark> | The filepath name                                       |
+| `data`     | <mark style="color:green;">`string`</mark> | The data to the file.                                   |
+| `mode`     | <mark style="color:green;">`string`</mark> | -> <mark style="color:purple;">optional</mark> "binary" |
+
+<mark style="color:purple;">`file`</mark> `read(`<mark style="color:green;">`filepath`</mark>`)` -> <mark style="color:purple;">string</mark>
+
+| Name       | Type                                       | Description        |
+| ---------- | ------------------------------------------ | ------------------ |
+| `filepath` | <mark style="color:green;">`string`</mark> | The filepath name. |
+
+* This will only read/write in the photon data folder.
+
+<mark style="color:purple;">`file`</mark> **`list_folder(`**<mark style="color:green;">`folderpath`</mark>**`)`** -> <mark style="color:purple;">table</mark>
+
+Returns a sequential table of filenames inside the given folder. Both files and subfolders are included.
+
+<mark style="color:purple;">`file`</mark> **`delete_file(`**<mark style="color:green;">`filepath`</mark>**`)`** -> <mark style="color:purple;">void</mark>
+
+Deletes a single file at the given path.
+
+<mark style="color:purple;">`file`</mark> **`delete_folder(`**<mark style="color:green;">`folderpath`</mark>**`)`** -> <mark style="color:purple;">void</mark>
+
+Recursively deletes a folder and all of its contents.
+
+## Example
+
+```lua
+local data = "hello!"
+
+file.write("test.txt", data)
+
+local read_data = file.read("test.txt") -- returns "hello!"
+
+print(read_data)
+```
