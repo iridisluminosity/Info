@@ -1,0 +1,73 @@
+# http
+
+<mark style="color:purple;">`http`</mark> `get(`<mark style="color:green;">`website`</mark>, <mark style="color:green;">`function: body, statuscode`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Retrieves websites body.
+
+| Name       | Type                                         | Description                          |
+| ---------- | -------------------------------------------- | ------------------------------------ |
+| website    | <mark style="color:green;">`string`</mark>   | Website address.                     |
+| function   | <mark style="color:green;">`function`</mark> | Callback function.                   |
+| body       | <mark style="color:green;">`string`</mark>   | Data returned by the website.        |
+| statuscode | <mark style="color:green;">`number`</mark>   | Status code returned by the website. |
+
+<mark style="color:purple;">`http`</mark> `post(`<mark style="color:green;">`website`</mark>, <mark style="color:green;">`payload`</mark>, <mark style="color:green;">`function: body, statuscode`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sends a post to the website.
+
+| Name       | Type                                       | Description                          |
+| ---------- | ------------------------------------------ | ------------------------------------ |
+| website    | <mark style="color:green;">`string`</mark> | Website address.                     |
+| payload    | <mark style="color:green;">`string`</mark> | Data to post.                        |
+| body       | <mark style="color:green;">`string`</mark> | Data returned by the website.        |
+| statuscode | <mark style="color:green;">`number`</mark> | Status code returned by the website. |
+
+<mark style="color:purple;">`http`</mark> `request(`*<mark style="color:green;">`table`</mark>*`)` -> <mark style="color:purple;">table</mark>
+
+| Name    | Type                                       | Description                                              |
+| ------- | ------------------------------------------ | -------------------------------------------------------- |
+| url     | <mark style="color:green;">`string`</mark> | Target address.                                          |
+| method  | <mark style="color:green;">`string`</mark> | GET, POST, PUT, PATCH or DELETE. Defaults to GET.t "GET" |
+| body    | <mark style="color:green;">`string`</mark> | Data to send. Ignored on GET.                            |
+| headers | <mark style="color:green;">`table`</mark>  | Headers to send, as name = value pairs.                  |
+| timeout | <mark style="color:green;">`number`</mark> | Seconds to wait before giving up. Defaults to 10.        |
+
+**Returns**
+
+| Name    | Type                                       | Description                                    |
+| ------- | ------------------------------------------ | ---------------------------------------------- |
+| ok      | <mark style="color:green;">`bool`</mark>   | Whether the server was reached.                |
+| status  | <mark style="color:green;">`number`</mark> | Status code the server replied with.           |
+| body    | <mark style="color:green;">`string`</mark> | Data returned by the website.                  |
+| headers | <mark style="color:green;">`table`</mark>  | Response headers. Names are lowercase.         |
+| error   | <mark style="color:green;">`string`</mark> | Why the request failed. Empty when ok is true. |
+
+## Example
+
+```lua
+http.get("https://cataas.com/cat", function(body, stats)
+    if stats == 200 then -- 200 = success, 500 = error
+        local filename = "random_cat.jfif"
+        file.write(filename, body, "binary")
+    end
+end)
+
+local res = http.request({
+    url = "http://127.0.0.1:3000/mcp",
+    method = "POST",
+    body = tabletoJSON({ jsonrpc = "2.0", id = 1, method = "tools/list" }),
+    headers = {
+        ["Content-Type"] = "application/json",
+        ["Accept"] = "application/json, text/event-stream",
+    },
+})
+
+if not res.ok then
+    print("request failed: " .. res.error)
+elseif res.status == 200 then
+    local session = res.headers["mcp-session-id"]
+    
+    local reply = JSONtotable(res.body)
+    print(reply)
+end
+```
