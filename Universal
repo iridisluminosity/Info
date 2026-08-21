@@ -1,0 +1,228 @@
+# universal
+
+<mark style="color:purple;">`istance`</mark> `identity` -> <mark style="color:purple;">int</mark>
+
+Gets instance custom id, every instance has its own.
+
+<mark style="color:purple;">`stance`</mark> `address` -> <mark style="color:purple;">int64</mark>
+
+Gets the instance memory address.
+
+<mark style="color:purple;">`instance`</mark> `name` -> <mark style="color:purple;">string</mark>
+
+Gets name of the instance.
+
+<mark style="color:purple;">`instance`</mark> `class_name` -> <mark style="color:purple;">string</mark>
+
+Gets the class name of the instance.
+
+<mark style="color:purple;">`instance`</mark> `get_parent()` -> <mark style="color:purple;">instance</mark>
+
+Returns the instance parent from the instance.
+
+<mark style="color:purple;">`instance`</mark> `isvalid()` -> <mark style="color:purple;">bool</mark>
+
+Checks if the instance is in roblox or invalid.&#x20;
+
+<mark style="color:purple;">`instance`</mark> `isa(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+Checks if the the instance is this type of class name.
+
+<mark style="color:purple;">`instance`</mark> `find_first_descendant(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">instance</mark>
+
+Returns the first descendant found with the given name.
+
+<mark style="color:purple;">`instance`</mark> `find_first_descendant_of_class(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">instance</mark>
+
+Returns the first descendant found with the given class name.
+
+<mark style="color:purple;">`instance`</mark> `find_first_child(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">instance</mark>
+
+Returns the first child of the instance found with the given name.
+
+<mark style="color:purple;">`instance`</mark> `wait_for_child(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">instance</mark>
+
+Returns the child instance with the specified name once it is found.
+
+* The function will keep waiting indefinitely if the specified child instance is never added.
+
+<mark style="color:purple;">`instance`</mark> `find_first_child_class(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">instance</mark>
+
+Finds the instance by the class name and returns it.
+
+<mark style="color:purple;">`instance`</mark> `get_service(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">instance</mark>
+
+Finds the service instance by the name and returns it.
+
+<mark style="color:purple;">`instance`</mark> `get_children()` -> <mark style="color:purple;">table</mark>
+
+Gets every instance inside the current instance.
+
+<mark style="color:purple;">`instance`</mark> `get_descendants()` -> <mark style="color:purple;">table</mark>
+
+Gets every instance that contains all of the descendants of that instance.
+
+<mark style="color:purple;">`instance`</mark> `is_ancestor_of(`<mark style="color:green;">`instance`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+Returns true if an instance is an ancestor of the given descendant.
+
+<mark style="color:purple;">`instance`</mark> `is_descendant_of(`<mark style="color:green;">`instance`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+Returns true if an instance is a descendant of the given ancestor.
+
+<mark style="color:purple;">`instance`</mark> `get_attribute(`<mark style="color:green;">`string`</mark>,  <mark style="color:green;">`attribute_type`</mark>`)` -> <mark style="color:purple;">value type</mark>
+
+Returns the value which has been assigned to the given attribute name. If no attribute has been assigned, nil is returned.
+
+<mark style="color:purple;">`instance`</mark> `set_attribute(`<mark style="color:green;">`string`</mark>,  <mark style="color:green;">`attribute_type`</mark>, <mark style="color:green;">`value`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the attribute with the given name to the given value. Doesnt work for `STRING` attribute type.
+
+<mark style="color:purple;">`instance`</mark> `get_attributes()` -> <mark style="color:purple;">table</mark>
+
+Returns every attributes assigned to the instance.
+
+## Example
+
+```lua
+local players = game:get_service("Players")
+local workspace = game:get_service("Workspace")
+
+local random_player = players:find_first_child_class("Player")
+print(random_player.name)
+
+local localplayer = players.local_player
+local localcharacter = localplayer.character
+if localcharacter:isvalid() then
+    local character_head = localcharacter:find_first_child("Head")
+    
+    if character_head:isvalid() then
+        print(character_head.name)
+        print(character_head:get_parent().name) -- character<-head
+    end
+    
+    for _, v in pairs(localcharacter:get_children()) do
+        if v.identity == character_head.identity then
+            print("Found")
+            break
+        end
+    end
+end
+
+
+local part = workspace:find_first_child("Part")
+for name, type in pairs(part:get_attributes()) do
+    print(name, type)
+end
+
+local bool_attribute = part:get_attribute("name_1", attribute_type.BOOLEAN)
+if bool_attribute then
+    print(bool_attribute)
+end
+
+local number_attribute = part:get_attribute("name_2", attribute_type.NUMBER)
+if number_attribute then
+    print(number_attribute)
+end
+part:set_attribute("name_2", attribute_type.NUMBER, 0)
+```
+
+<mark style="color:purple;">`void`</mark> `add_entity(`<mark style="color:green;">`name`</mark>, <mark style="color:green;">`part`</mark>, <mark style="color:green;">`humanoid`</mark>, <mark style="color:green;">`should_aimbot`</mark>, <mark style="color:green;">`min`</mark>, <mark style="color:green;">`max`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Adds instance part to the esp, aimbot, triggerbot player system.
+
+| Name           | Type                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| name           | <mark style="color:green;">`string`</mark>                                                  |
+| part           | <mark style="color:green;">`instance`</mark>                                                |
+| humanoid       | <mark style="color:green;">`instance`</mark> -> <mark style="color:purple;">optional</mark> |
+| should\_aimbot | <mark style="color:green;">`bool`</mark>                                                    |
+| min            | <mark style="color:green;">`vector3`</mark>                                                 |
+| max            | <mark style="color:green;">`vector3`</mark>                                                 |
+
+<mark style="color:purple;">`void`</mark> `add_entity_ex(`<mark style="color:green;">`name`</mark>, <mark style="color:green;">`character`</mark>, <mark style="color:green;">`humanoid`</mark>, <mark style="color:green;">`root`</mark>, <mark style="color:green;">`should_aimbot`</mark>, <mark style="color:green;">`min`</mark>, <mark style="color:green;">`max`</mark>, <mark style="color:green;">`bodyparts`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Adds instance part to the esp, aimbot, triggerbot player system.
+
+| Name           | Type                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| name           | <mark style="color:green;">`string`</mark>                                                  |
+| character      | <mark style="color:green;">`instance`</mark>                                                |
+| humanoid       | <mark style="color:green;">`instance`</mark> -> <mark style="color:purple;">optional</mark> |
+| root           | <mark style="color:green;">`instance`</mark>                                                |
+| should\_aimbot | <mark style="color:green;">`bool`</mark>                                                    |
+| min            | <mark style="color:green;">`vector3`</mark>                                                 |
+| max            | <mark style="color:green;">`vector3`</mark>                                                 |
+| bodyparts      | <mark style="color:green;">`table`</mark>                                                   |
+
+<mark style="color:purple;">`void`</mark> `force_custom_players()` -> <mark style="color:purple;">void</mark>
+
+Disables the player caching system allowing only custom entities to be cached.
+
+<mark style="color:purple;">`void`</mark> `add_custom_hitparts(`<mark style="color:green;">`bodyparts`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Changes the aimbot, triggerbot, etc hitpart dropdown to the specific bodypart.
+
+<mark style="color:purple;">`void`</mark> `set_entity_rate(`<mark style="color:green;">`ms`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Changes how fast the hook gets called, capped at 200ms.
+
+<mark style="color:purple;">`void`</mark> `get_entity_rate()` -> <mark style="color:purple;">ms</mark>
+
+Gets how fast the hook gets called.
+
+**The listed functions only works in the "init\_custom\_entity" hook**
+
+`add_custom_hitparts`
+
+`force_custom_players`
+
+`add_entity_ex`
+
+`add_entity`
+
+## Example
+
+<pre class="language-lua"><code class="lang-lua"><strong>-- phantom forces simple esp
+</strong><strong>local folder = game:get_service("Workspace"):find_first_child("Players")
+</strong>local random_team = folder:find_first_child_class("Folder")
+
+hook.add("init_custom_entity", "phantom_forces", function()
+    for _, plr in pairs(random_team:get_children()) do
+        local part = plr:find_first_child_class("Part")
+        add_entity("Enemy", part, nil_instance, true, vector3(1, 0, 1), vector3(1, 1, 1))
+    end
+end)
+
+
+-- Advanced version
+local players = game:get_service("Players")
+
+hook.add("init_custom_entity", "phantom_forces", function()
+    add_custom_hitparts({ "Head", "Torso" }) -- Changes the hitparts for aimbot, triggerbot, etc
+    force_custom_players() -- Disables the player caching system
+    
+    for _, plr in pairs(players:get_children()) do
+        local plr_character = plr.character
+        local head = plr_character:find_first_child("Head")
+        local torso = plr_character:find_first_child("Torso") -- R6
+        local root = plr_character:find_first_child("HumanoidRootPart")
+        
+        add_entity_ex(
+            "Enemy", -- Name
+            plr_character, -- Character
+            nil_instance, -- Humanoid
+            root, -- Root
+            true, -- Should aimbot
+            vector3(1, 0, 1), -- Min
+            vector3(1, 1, 1), -- Max
+            { -- Body parts
+                { "Head", head }, -- Defines the head instance for custom hitpart
+                { "Torso", torso }
+            }
+        )
+    end
+end)
+</code></pre>
+
+<figure><img src="/files/fpnqEhxNw0vOoIaFwpbS" alt=""><figcaption></figcaption></figure>
