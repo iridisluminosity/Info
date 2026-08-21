@@ -1,0 +1,48 @@
+# gui
+
+<mark style="color:purple;">`instance`</mark> `get_label_text()` -> <mark style="color:purple;">string</mark>
+
+Gets text name from the label
+
+<mark style="color:purple;">`instance`</mark> `get_label_text_color()` -> <mark style="color:purple;">color</mark>
+
+Returns the text color3 from the label
+
+<mark style="color:purple;">`instance`</mark> `get_label_background_color()` -> <mark style="color:purple;">color</mark>
+
+Returns the background color3 from the label
+
+<mark style="color:purple;">`instance`</mark> `gui_position` -> <mark style="color:purple;">vector2</mark>
+
+Returns the guis position in pixels, You can use this on frames, text label/button etc.
+
+<mark style="color:purple;">`instance`</mark> `gui_size` -> <mark style="color:purple;">vector2</mark>
+
+Returns the guis size in pixels, You can use this on frames, text label/button etc.
+
+<mark style="color:purple;">`instance`</mark> `set_gui_size(`<mark style="color:green;">`vector2`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the gui size in pixels.
+
+<mark style="color:purple;">`instance`</mark> `set_frame_position(`<mark style="color:green;">`vector2`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the frame position in pixels.
+
+## Example
+
+```lua
+local starter_gui = game:get_service("StarterGui")
+local screen_gui = starter_gui:find_first_child_class("ScreenGui")
+local text_label = screen_gui:find_first_child_class("TextLabel")
+
+local text = text_label:get_label_text()
+local label_color = text_label:get_label_text_color()
+local background_color = text_label:get_label_background_color()
+local text_label_position = text_label.gui_position
+local text_label_size = text_label.gui_size
+
+print(text_label_position.x, text_label_position.y)
+print(label_color.r, label_color.g, label_color.b)
+print(background_color.r, background_color.g, background_color.b)
+print(text)
+```
