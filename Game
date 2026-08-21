@@ -1,0 +1,87 @@
+# game
+
+<mark style="color:purple;">`var`</mark> `game` -> <mark style="color:purple;">instance</mark>
+
+The datamodel of roblox.
+
+<mark style="color:purple;">`var`</mark> `nil_instance` -> <mark style="color:purple;">instance</mark>
+
+A instance with no stored data.
+
+<mark style="color:purple;">`void`</mark> `get_placeid()` -> <mark style="color:purple;">string</mark>
+
+Gets the game placeid.
+
+<mark style="color:purple;">`void`</mark> `get_gameid()` -> <mark style="color:purple;">string</mark>
+
+Gets the gameid session.
+
+<mark style="color:purple;">`void`</mark> `get_jobid()` -> <mark style="color:purple;">string</mark>
+
+Gets the jobid session.
+
+<mark style="color:purple;">`void`</mark> `get_ping()` -> <mark style="color:purple;">float</mark>
+
+Gets current ping in the game.
+
+<mark style="color:purple;">`void`</mark> `get_memory()` -> <mark style="color:purple;">float</mark>
+
+Gets current memory usage from roblox.
+
+<mark style="color:purple;">`void`</mark> `get_cpu()` -> <mark style="color:purple;">float</mark>
+
+Gets current gpu usage from roblox.
+
+<mark style="color:purple;">`void`</mark> `get_gpu()` -> <mark style="color:purple;">float</mark>
+
+Gets current gpu usage from roblox.
+
+<mark style="color:purple;">`void`</mark> `get_fps()` -> <mark style="color:purple;">float</mark>
+
+Gets frames per second from roblox.
+
+<mark style="color:purple;">`void`</mark> `get_players()` -> <mark style="color:purple;">table</mark>
+
+Gets the table of the current players in the game.
+
+<mark style="color:purple;">`void`</mark> `get_characters()` -> <mark style="color:purple;">table</mark>
+
+Gets the table of the current characters in the game.
+
+<mark style="color:purple;">`void`</mark> `get_screen_size()` -> <mark style="color:purple;">vector2</mark>
+
+Returns the display size of roblox.
+
+Example returns { 1920, 1080 }
+
+<mark style="color:purple;">`void`</mark> `refresh_roblox()` -> <mark style="color:purple;">void</mark>
+
+Refreshes the software, Only suppose to be using when rejoining a new game.
+
+## Example
+
+```lua
+local gameid = get_gameid()
+print(gameid)
+
+local placeid = get_placeid()
+print(placeid)
+print(tostring(placeid == "4483381587"))
+
+local ping = get_ping()
+print(ping)
+
+local screen_size = get_screen_size()
+print(screen_size.x, screen_size.y)
+
+for _, v in pairs(get_players()) do
+    log.add(v.name .. " - " .. v.class_name)
+    
+    local character = v:get_character()
+    log.add(character.name .. " - " .. character.class_name)
+end
+
+for _, v in pairs(get_characters()) do
+    log.add(v.name .. " - " .. v.class_name)
+end
+```
