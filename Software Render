@@ -1,0 +1,228 @@
+# render
+
+<mark style="color:purple;">`render`</mark> `deltatime()` -> <mark style="color:purple;">float</mark>
+
+Gets the overlay delta time.
+
+<mark style="color:$warning;">**`Every function under must be called in the hook "render" to work`**</mark>
+
+<mark style="color:purple;">`render`</mark> `add_line(`<mark style="color:green;">`position1`</mark>, <mark style="color:green;">`position2`</mark>, <mark style="color:green;">`color`</mark>, <mark style="color:green;">`thickness`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Draws a line from position1 to position2.
+
+| Name      | Type                                                                                     |
+| --------- | ---------------------------------------------------------------------------------------- |
+| position1 | <mark style="color:green;">`vector2`</mark>                                              |
+| position2 | <mark style="color:green;">`vector2`</mark>                                              |
+| color     | <mark style="color:green;">`color`</mark>                                                |
+| thickness | <mark style="color:green;">`float`</mark> <mark style="color:purple;">-></mark> optional |
+
+<mark style="color:purple;">`render`</mark> `add_rect(`<mark style="color:green;">`mins`</mark>, <mark style="color:green;">`maxs`</mark>, <mark style="color:green;">`color`</mark>, <mark style="color:green;">`rounding`</mark>, <mark style="color:green;">`thickness`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Draws a rectangle starting.
+
+| Name      | Type                                                                                     |
+| --------- | ---------------------------------------------------------------------------------------- |
+| mins      | <mark style="color:green;">`vector2`</mark>                                              |
+| maxs      | <mark style="color:green;">`vector2`</mark>                                              |
+| color     | <mark style="color:green;">`color`</mark>                                                |
+| rounding  | <mark style="color:green;">`float`</mark> <mark style="color:purple;">-></mark> optional |
+| thickness | <mark style="color:green;">`float`</mark> <mark style="color:purple;">-></mark> optional |
+
+<mark style="color:purple;">`render`</mark> `add_rect_filled()` -> <mark style="color:purple;">void</mark>
+
+Identical usage as add\_rect.
+
+<mark style="color:purple;">`render`</mark> `get_text_size(`<mark style="color:green;">`text`</mark>`)` -> <mark style="color:purple;">vector2</mark>
+
+Returns how big/size of the text.
+
+<mark style="color:purple;">`render`</mark> `add_arc(`<mark style="color:green;">`position`</mark>, <mark style="color:green;">`radius`</mark>, <mark style="color:green;">`angle_start`</mark>, <mark style="color:green;">`angle_end`</mark>, <mark style="color:green;">`color`</mark>, <mark style="color:green;">`thickness`</mark>, <mark style="color:green;">`segments`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Draws continuous portion of a curved line
+
+<table><thead><tr><th>Name</th><th>Type</th><th data-hidden>Description</th></tr></thead><tbody><tr><td>position</td><td><mark style="color:green;"><code>vector2</code></mark></td><td>Text position on screen.</td></tr><tr><td>radius</td><td><mark style="color:green;"><code>float</code></mark></td><td>Text to draw.</td></tr><tr><td>angle_start</td><td><mark style="color:green;"><code>float</code></mark></td><td>Text color in RGBA.</td></tr><tr><td>angle_end</td><td><mark style="color:green;"><code>float</code></mark></td><td></td></tr><tr><td>color</td><td><mark style="color:green;"><code>color</code></mark></td><td></td></tr><tr><td>thickness</td><td><mark style="color:green;"><code>float</code></mark> <mark style="color:purple;">-></mark> optional</td><td></td></tr><tr><td>segments</td><td><mark style="color:green;"><code>int</code></mark> <mark style="color:purple;">-></mark> optional</td><td></td></tr></tbody></table>
+
+<mark style="color:purple;">`render`</mark> `add_pie_filled(`<mark style="color:green;">`position`</mark>, <mark style="color:green;">`radius`</mark>, <mark style="color:green;">`angle_start`</mark>, <mark style="color:green;">`angle_end`</mark>, <mark style="color:green;">`color`</mark>, <mark style="color:green;">`segments`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Identical usage as add\_arc.
+
+<table><thead><tr><th>Name</th><th>Type</th><th data-hidden>Description</th></tr></thead><tbody><tr><td>position</td><td><mark style="color:green;"><code>vector2</code></mark></td><td>Text position on screen.</td></tr><tr><td>radius</td><td><mark style="color:green;"><code>float</code></mark></td><td>Text to draw.</td></tr><tr><td>angle_start</td><td><mark style="color:green;"><code>float</code></mark></td><td>Text color in RGBA.</td></tr><tr><td>angle_end</td><td><mark style="color:green;"><code>float</code></mark></td><td></td></tr><tr><td>color</td><td><mark style="color:green;"><code>color</code></mark></td><td></td></tr><tr><td>segments</td><td><mark style="color:green;"><code>int</code></mark> <mark style="color:purple;">-></mark> optional</td><td></td></tr></tbody></table>
+
+<mark style="color:purple;">`render`</mark> `add_text(`<mark style="color:green;">`position`</mark>, <mark style="color:green;">`text`</mark>, <mark style="color:green;">`color`</mark>, <mark style="color:green;">`size`</mark>, <mark style="color:green;">`outline`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Draws text at position.
+
+<table><thead><tr><th>Name</th><th>Type</th><th data-hidden>Description</th></tr></thead><tbody><tr><td>position</td><td><mark style="color:green;"><code>vector2</code></mark></td><td>Text position on screen.</td></tr><tr><td>text</td><td><mark style="color:green;"><code>string</code></mark></td><td>Text to draw.</td></tr><tr><td>color</td><td><mark style="color:green;"><code>color</code></mark></td><td>Text color in RGBA.</td></tr><tr><td>size</td><td><mark style="color:green;"><code>float</code></mark> <mark style="color:purple;">-></mark> optional</td><td></td></tr><tr><td>outline</td><td><mark style="color:green;"><code>bool</code></mark> <mark style="color:purple;">-></mark> optional</td><td></td></tr></tbody></table>
+
+<mark style="color:purple;">`render`</mark> `add_extra(`<mark style="color:green;">`text`</mark>, <mark style="color:green;">`type`</mark>, <mark style="color:green;">`color`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Draws text on the player ESP.&#x20;
+
+* Manually supported games will use character instead of player.
+* This can only be called in the "esp\_drawextra" hook.
+
+<table><thead><tr><th>Name</th><th>Type</th><th data-hidden>Description</th></tr></thead><tbody><tr><td>text</td><td><mark style="color:green;"><code>string</code></mark></td><td>Text to draw.</td></tr><tr><td>type</td><td><p>ESP_TOP</p><p>ESP_BOTTOM</p><p>ESP_RIGHT</p><p>ESP_LEFT</p></td><td></td></tr><tr><td>color</td><td><mark style="color:green;"><code>color</code></mark></td><td>Text color in RGBA.</td></tr></tbody></table>
+
+<mark style="color:purple;">`render`</mark> `add_circle(`<mark style="color:green;">`position`</mark>, <mark style="color:green;">`radius`</mark>, <mark style="color:green;">`color`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Adds a circle at position with changable radius.
+
+| Name     | Type                                        |
+| -------- | ------------------------------------------- |
+| position | <mark style="color:green;">`vector2`</mark> |
+| radius   | <mark style="color:green;">`number`</mark>  |
+| color    | <mark style="color:green;">`color`</mark>   |
+
+<mark style="color:purple;">`render`</mark> `add_circle_filled()` -> <mark style="color:purple;">void</mark>
+
+Identical usage as add\_circle.
+
+<mark style="color:purple;">`render`</mark> `add_polyline(`<mark style="color:green;">`points`</mark>, <mark style="color:green;">`color`</mark>, <mark style="color:green;">`thickness`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Creates a line with multiple points
+
+| Name      | Type                                                                                     |
+| --------- | ---------------------------------------------------------------------------------------- |
+| points    | <mark style="color:green;">`{vector2}`</mark>                                            |
+| color     | <mark style="color:green;">`color`</mark>                                                |
+| thickness | <mark style="color:green;">`float`</mark> <mark style="color:purple;">-></mark> optional |
+
+<mark style="color:purple;">`render`</mark> `add_triangle(`<mark style="color:green;">`point1`</mark>, <mark style="color:green;">`point2`</mark>, <mark style="color:green;">`point3`</mark>, <mark style="color:green;">`color`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Plots a triangle
+
+| Name   | Type                                        |
+| ------ | ------------------------------------------- |
+| point1 | <mark style="color:green;">`vector2`</mark> |
+| point2 | <mark style="color:green;">`vector2`</mark> |
+| point3 | <mark style="color:green;">`vector2`</mark> |
+| color  | <mark style="color:green;">`color`</mark>   |
+
+<mark style="color:purple;">`render`</mark> `add_triangle_filled()` -> <mark style="color:purple;">void</mark>
+
+Identical usage as add\_triangle.
+
+<mark style="color:purple;">`render`</mark> `add_ngon(`<mark style="color:green;">`vector2`</mark>, <mark style="color:green;">`radius`</mark>, <mark style="color:green;">`color`</mark>, <mark style="color:green;">`segments`</mark>, <mark style="color:green;">`thickness`</mark>`)`
+
+Plots a poly shape.
+
+| Name      | Type                                                                                     |
+| --------- | ---------------------------------------------------------------------------------------- |
+| vector2   | <mark style="color:green;">`vector2`</mark>                                              |
+| radius    | <mark style="color:green;">`float`</mark>                                                |
+| color     | <mark style="color:green;">`color`</mark>                                                |
+| segment   | <mark style="color:green;">`int`</mark> <mark style="color:purple;">-></mark> optional   |
+| thickness | <mark style="color:green;">`float`</mark> <mark style="color:purple;">-></mark> optional |
+
+<mark style="color:purple;">`render`</mark> `add_ngon_filled()` -> <mark style="color:purple;">void</mark>
+
+Identical usage as add\_ngon.
+
+<mark style="color:purple;">`texture_table`</mark> -> <mark style="color:purple;">`table`</mark>
+
+| Name   | Type                                      |
+| ------ | ----------------------------------------- |
+| id     | <mark style="color:green;">`int`</mark>   |
+| width  | <mark style="color:green;">`float`</mark> |
+| height | <mark style="color:green;">`float`</mark> |
+
+<mark style="color:purple;">`render`</mark> `load_texture(`<mark style="color:green;">`filename`</mark>`)` -> <mark style="color:purple;">texture\_table</mark>
+
+Converts the texture to be usable for render.addimage.
+
+We currently support `jpg`, `jpeg`, `png`, `bmp`, `webp` file types.
+
+| Name     | Type                                       |
+| -------- | ------------------------------------------ |
+| filename | <mark style="color:green;">`string`</mark> |
+
+<mark style="color:purple;">`render`</mark> `add_texture(`<mark style="color:green;">`textureid`</mark>, <mark style="color:green;">`min`</mark>, <mark style="color:green;">`max`</mark>, <mark style="color:green;">`color`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Renders the image from load\_texture textureid.
+
+| Name      | Type                                                                                     |
+| --------- | ---------------------------------------------------------------------------------------- |
+| textureid | <mark style="color:green;">`texture_table.id`</mark>                                     |
+| min       | <mark style="color:green;">`vector2`</mark>                                              |
+| max       | <mark style="color:green;">`vector2`</mark>                                              |
+| color     | <mark style="color:green;">`color`</mark> <mark style="color:purple;">-></mark> optional |
+
+## Example
+
+<pre class="language-lua"><code class="lang-lua">local tole = render.load_texture("toletole.png")
+<strong>
+</strong><strong>hook.add("render", "my hook", function()
+</strong>    render.add_line(
+        vector2(20, 145),  
+        vector2(500, 145), 
+        color(1, 1, 1, 1), 
+        1-- thickness
+    )
+
+    render.add_rect(
+        vector2(20, 200), 
+        vector2(500, 400) , 
+        color(0, 0, 1,1), 
+        3, -- rounding
+        1 -- thickness
+    )
+
+    render.add_text(
+        vector2(262, 220), 
+        "Player", 
+        color(1, 1, 1, 1)
+    )
+
+    render.add_circle_filled(
+        vector2(265, 303), 
+        55, -- radius
+        color(1, 1, 1, 1)
+    )
+
+    render.add_triangle(
+        vector2(510, 402), 
+        vector2(631, 271), 
+        vector2(808, 398), 
+        color(1, 0, 1, 1), 
+        3 -- thickness
+    )
+
+    render.add_ngon(
+        vector2(252, 511), 
+        40, -- radius
+        color(0.5, 0.3, 1, 1), 
+        5, -- segments
+        1 -- thickness
+    )
+
+    render.add_polyline( {
+        vector2(59, 568), 
+        vector2(296, 563), 
+        vector2(564, 432), 
+        vector2(600, 600), 
+        vector2(824, 524) },
+        color(1, 1, 0, 1),
+        1 -- thickness
+    )
+    
+    if tole then
+        -- identifier, pos (top left pixel of img will be pos), width, height, transparency
+        render.add_image(
+            tole.id, 
+            vector2(500,44), 
+            vector2(50, 50), 
+            vector2(100, 100), 
+            1
+        )
+    end
+end)
+
+hook.add("esp_drawextra", "draw_extra_example", function(plr) 
+    render.add_extra("Test123", ESP_TOP, color(1, 1, 1, 1))
+end)
+</code></pre>
+
+## Result
+
+<figure><img src="/files/cPPNo5SqPF5Fh9GfMvzt" alt=""><figcaption></figcaption></figure>
