@@ -1,0 +1,69 @@
+# input
+
+<mark style="color:purple;">`input`</mark> `get_mouse_position()` -> <mark style="color:purple;">vector2</mark>
+
+Returns your 2D mouse position.
+
+<mark style="color:purple;">`input`</mark> `set_mouse_position(`<mark style="color:green;">`vector2`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets your mouse position in the coordinate.
+
+<mark style="color:purple;">`input`</mark> `set_mouse_position_rel(`<mark style="color:green;">`vector2`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Moves your mouse position in the coordinate.
+
+<mark style="color:purple;">`input`</mark> `simulate_press(`<mark style="color:green;">`int`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Simulates a key press, takes virtual key codes.
+
+<mark style="color:purple;">`input`</mark> `simulate_press_down(`<mark style="color:green;">`int`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Simulates a key press down, takes virtual key codes.
+
+<mark style="color:purple;">`input`</mark> `simulate_press_up(`<mark style="color:green;">`int`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Simulates a key press up, takes virtual key codes.
+
+* Use MOUSE1 (Left Mouse Button) MOUSE2 (Right Mouse Button) MOUSE3 (Middle Mouse Button)
+
+<mark style="color:purple;">`input`</mark> `simulate_mouse_up(`<mark style="color:green;">`int`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Simulates mouse up movement.
+
+<mark style="color:purple;">`input`</mark> `simulate_mouse_down(`<mark style="color:green;">`int`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Simulates mouse down movement.
+
+<mark style="color:purple;">`input`</mark> `simulate_mouse_click(`<mark style="color:green;">`int`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Simulates mouse click.
+
+<mark style="color:purple;">`input`</mark> `scroll(`<mark style="color:green;">`int`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Simulates a scroll, example (`-120`, `120`)
+
+<mark style="color:purple;">`input`</mark> `key_down(`<mark style="color:green;">`int`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+Checks if the key is down, takes virtual key codes.
+
+<mark style="color:purple;">`input`</mark> `is_key_pressed(`<mark style="color:green;">`int`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+Returns true once when the key is being held.
+
+<mark style="color:purple;">`input`</mark> `set_clipboard(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the clipboard with the string
+
+* [virtual key codes](https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)
+
+## Example
+
+```lua
+local mouse_pos = input.get_mouse_position()
+
+input.set_mouse_position(mouse_pos:add(vector2(1, 1)))
+
+input.simulate_press(0x2D) -- simulates insert key [VK_INSERT 	0x2D 	INS key]
+
+input.simulate_mouse_up(MOUSE2)
+```
