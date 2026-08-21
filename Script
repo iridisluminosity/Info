@@ -1,0 +1,9 @@
+# script
+
+<mark style="color:purple;">`instance`</mark> `getscriptbytecode()` -> <mark style="color:purple;">string</mark>
+
+Returns base64 encrypted byte code of the script.
+
+<mark style="color:purple;">`instance`</mark> `decompile_script()` -> <mark style="color:purple;">string</mark>
+
+Returns decompiled script.
