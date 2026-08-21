@@ -1,0 +1,100 @@
+# player
+
+<mark style="color:purple;">`instance`</mark> `is_friend()` -> <mark style="color:purple;">bool</mark>
+
+Checks if player is added in the friend table in the software.
+
+<mark style="color:purple;">`instance`</mark> `get_team()` -> <mark style="color:purple;">instance</mark>
+
+Gets players team.
+
+<mark style="color:purple;">`instance`</mark> `display_name` -> <mark style="color:purple;">string</mark>
+
+Gets the players display name.
+
+<mark style="color:purple;">`instance`</mark> `local_player` -> <mark style="color:purple;">instance</mark>
+
+Gets local player.
+
+<mark style="color:purple;">`instance`</mark> `userid` -> <mark style="color:purple;">string</mark>
+
+Gets players user id from roblox.
+
+<mark style="color:purple;">`instance`</mark> `character` -> <mark style="color:purple;">instance</mark>
+
+Gets the character of player.
+
+<mark style="color:purple;">`instance`</mark> `get_camera_max_dist()` -> <mark style="color:purple;">float</mark>
+
+Gets camera max distance.
+
+<mark style="color:purple;">`instance`</mark> `set_camera_max_dist(`<mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets camera max distance.
+
+<mark style="color:purple;">`instance`</mark> `get_camera_min_dist()` -> <mark style="color:purple;">float</mark>
+
+Gets camera min distance.
+
+<mark style="color:purple;">`instance`</mark> `set_camera_min_dist(`<mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets camera min distance.
+
+<mark style="color:purple;">`void`</mark> **`get_cached_playerinfo(`**<mark style="color:green;">`plr`</mark>**`)`** -> <mark style="color:purple;">table</mark>
+
+Returns a table of cached info for a player instance. Returns <mark style="color:$warning;">`nil`</mark> if the player is not found.
+
+| Field          | Type                                                               | Description                         |
+| -------------- | ------------------------------------------------------------------ | ----------------------------------- |
+| `id`           | <mark style="color:green;">`string`</mark>                         | Player ID                           |
+| `name`         | <mark style="color:green;">`string`</mark>                         | Username                            |
+| `display_name` | <mark style="color:green;">`string`</mark>                         | Display name                        |
+| `weapon_name`  | <mark style="color:green;">`string`</mark>                         | Current weapon name                 |
+| `team_name`    | <mark style="color:green;">`string`</mark>                         | Team name                           |
+| `team_color`   | <mark style="color:green;">`color`</mark>                          | Team color                          |
+| `is_friend`    | [<mark style="color:green;">`bool`</mark>](#user-content-fn-1)[^1] | Is on your friends list             |
+| `is_target`    | [<mark style="color:green;">`bool`</mark>](#user-content-fn-1)[^1] | Is the current aimbot target        |
+| `same_team`    | [<mark style="color:green;">`bool`</mark>](#user-content-fn-1)[^1] | Is on the same team as local player |
+| `not_visible`  | [<mark style="color:green;">`bool`</mark>](#user-content-fn-1)[^1] | Failed last visibility check        |
+| `rigtype`      | <mark style="color:green;">`int`</mark>                            | `0` = R6, `1` = R15                 |
+| `player`       | <mark style="color:green;">`instance`</mark>                       | Player instance                     |
+| `character`    | <mark style="color:green;">`instance`</mark>                       | Character instance                  |
+| `team`         | <mark style="color:green;">`instance`</mark>                       | Team instance                       |
+
+<br>
+
+## Example
+
+<pre class="language-lua"><code class="lang-lua">local players = game:get_service("Players")
+local localplayer = players.local_player
+local character = localplayer.character -- in workspace
+
+print(localplayer.name)
+print(localplayer.display_name)
+local local_team = localplayer:get_team()
+
+if local_team:isvalid() then
+<strong>    print(local_team.name)
+</strong>end
+
+for i, v in pairs(players:get_children()) do
+    if v.class_name == "Player" and v.identity ~= localplayer.identity then -- not include localplayer
+        print(v.name)
+        print(tostring(v:is_friend()))
+        
+        if v:get_team().identity == local_team.identity then
+            print("same team")
+        end
+    end
+end
+
+local players = get_players()
+for _, player in ipairs(players) do
+    local info = get_cached_playerinfo(player)
+    if info then
+        print(info.name, info.team_name, info.rigtype)
+    end
+end
+</code></pre>
+
+[^1]:
