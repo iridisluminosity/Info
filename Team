@@ -1,0 +1,9 @@
+# team
+
+<mark style="color:purple;">`instance`</mark> `get_team_color()` -> <mark style="color:purple;">color</mark>
+
+Gets the team color display.
+
+<mark style="color:purple;">`instance`</mark> `get_team_index()` -> <mark style="color:purple;">int</mark>
+
+Gets the brick-color index.
