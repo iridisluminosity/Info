@@ -1,0 +1,9 @@
+# proximity button
+
+<mark style="color:purple;">`instance`</mark> `hold_duration` -> <mark style="color:purple;">float</mark>
+
+Specifies the amount of time (in seconds) required to complete the action once interaction begins.
+
+<mark style="color:purple;">`instance`</mark> `set_hold_duration(`<mark style="color:purple;">`float`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Overwrites the amount of time to complete the action when it begins.
