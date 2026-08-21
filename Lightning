@@ -1,0 +1,62 @@
+# lightning
+
+<mark style="color:purple;">`instance`</mark> `fog` -> <mark style="color:purple;">float</mark>
+
+Returns the fogend of lighting.
+
+<mark style="color:purple;">`instance`</mark> `set_fog(`<mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the fogend for lighting.
+
+<mark style="color:purple;">`instance`</mark> `exposure` -> <mark style="color:purple;">float</mark>
+
+Returns the exposure of lighting.
+
+<mark style="color:purple;">`instance`</mark> `set_exposure(`<mark style="color:green;">`float`</mark>`)`
+
+Sets the exposure for lighting.
+
+<mark style="color:purple;">`instance`</mark> `outdoor_ambient` -> <mark style="color:purple;">color</mark>
+
+Returns the color of lightnings outdoor ambient.
+
+<mark style="color:purple;">`instance`</mark> `set_outdoor_ambient(`<mark style="color:green;">`color`</mark>`)`
+
+Sets the color of lightnings outdoor ambient.
+
+<mark style="color:purple;">`instance`</mark> `ambient`  -> <mark style="color:purple;">color</mark>
+
+Gets the color of the lighting ambient.
+
+<mark style="color:purple;">`instance`</mark> `set_ambient(`<mark style="color:green;">`color`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the color of the lighting ambient.
+
+<mark style="color:purple;">`instance`</mark> `get_timeof_day()` -> <mark style="color:purple;">float</mark>
+
+Gets the time in roblox.
+
+<mark style="color:purple;">`instance`</mark> `set_timeof_day(`<mark style="color:green;">`value`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the time in roblox.
+
+## Example
+
+```lua
+local lighting = game:get_service("Lighting")
+
+print(lighting.exposure)
+print(lighting.fog)
+
+local ambient = lighting.ambient
+print(ambient.r, ambient.g, ambient.b, ambient.a)
+
+local outdoor_ambient = lighting.outdoor_ambient
+print(outdoor_ambient.r, outdoor_ambient.g, outdoor_ambient.b, outdoor_ambient.a)
+
+lighting:set_fog(100)
+lighting:set_exposure(1)
+
+lighting:set_outdoor_ambient(color(0, 0, 0))
+lighting:set_ambient(color(0, 0, 0))
+```
