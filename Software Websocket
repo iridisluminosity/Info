@@ -1,0 +1,52 @@
+# websocket
+
+<mark style="color:purple;">`websocket`</mark> `connect(`<mark style="color:green;">`link`</mark>`)` -> <mark style="color:purple;">struct/nil</mark>
+
+Creates a WebSocket connection to the given URL. Returns a connection object on success, or nil if the connection fails.
+
+<mark style="color:purple;">`struct`</mark> `send(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+Sends a text message. Returns true if successfully queued/sent, false on failure.
+
+<mark style="color:purple;">`struct`</mark> `send_binary(`<mark style="color:green;">`string`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+Sends binary data. Returns true if successful, false otherwise.
+
+<mark style="color:purple;">`struct`</mark> `recv()` -> <mark style="color:purple;">nil/string</mark>
+
+Returns next received message, or nil if no messages are available.
+
+<mark style="color:purple;">`struct`</mark> `close()` -> <mark style="color:purple;">void</mark>
+
+Closes the WebSocket connection.
+
+<mark style="color:purple;">`struct`</mark> `is_connected()` -> <mark style="color:purple;">bool</mark>
+
+Returns true if the connection is currently active.
+
+<mark style="color:purple;">`struct`</mark> `is_closed()` -> <mark style="color:purple;">bool</mark>
+
+Returns true if the connection has been closed.
+
+```lua
+-- Connect (returns nil on failure)
+local ws = websocket.connect("ws://localhost:8080")
+if not ws then 
+    print("connection failed") 
+    return 
+end
+
+-- Send text or binary
+ws:send("hello world")
+ws:send_binary("data")
+
+-- Poll for incoming messages (non-blocking, returns nil if none queued)
+local msg = ws:recv()
+
+-- Check state
+ws:is_connected()  -- true while connection is live
+ws:is_closed()     -- true after server sends a close frame
+
+-- Disconnect
+ws:close()
+```
