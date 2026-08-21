@@ -1,0 +1,76 @@
+# hook
+
+**All available hooks.**
+
+<table><thead><tr><th width="437">Name</th><th>Return type</th><th>Return args</th></tr></thead><tbody><tr><td>render</td><td><mark style="color:green;"><code>void</code></mark></td><td><mark style="color:green;"><code>void</code></mark></td></tr><tr><td>init_custom_entity</td><td><mark style="color:green;"><code>void</code></mark></td><td><mark style="color:green;"><code>void</code></mark></td></tr><tr><td>init</td><td><mark style="color:green;"><code>void</code></mark></td><td><mark style="color:green;"><code>void</code></mark></td></tr><tr><td>esp_drawextra</td><td><mark style="color:green;"><code>void</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr><tr><td>aimbot_check</td><td><mark style="color:green;"><code>bool</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr><tr><td>ignore_plr</td><td><mark style="color:green;"><code>bool</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr><tr><td>esp_ignore</td><td><mark style="color:green;"><code>bool</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr><tr><td>esp_name</td><td><mark style="color:green;"><code>string</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr><tr><td>aimbot_ignore</td><td><mark style="color:green;"><code>bool</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr><tr><td>triggerbot_ignore</td><td><mark style="color:green;"><code>bool</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr><tr><td>triggerbot_shouldfire</td><td><mark style="color:green;"><code>bool</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr><tr><td>silent_ignore</td><td><mark style="color:green;"><code>bool</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr><tr><td>append_watermark</td><td><mark style="color:green;"><code>string</code></mark></td><td><mark style="color:green;"><code>void</code></mark></td></tr><tr><td>player_added</td><td><mark style="color:green;"><code>void</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr><tr><td>player_removing</td><td><mark style="color:green;"><code>void</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr><tr><td>silent_check</td><td><mark style="color:green;"><code>bool</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr><tr><td>silent_ignore</td><td><mark style="color:green;"><code>bool</code></mark></td><td><mark style="color:green;"><code>instance</code></mark></td></tr></tbody></table>
+
+* All of the return args with instance will be returning the player, Not the character.
+
+<mark style="color:purple;">`hook`</mark> `add(`<mark style="color:green;">`name`</mark>, <mark style="color:green;">`id`</mark>, <mark style="color:green;">`function`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Adds a hook with a callback.
+
+| Name     | Type                                         | Description                                |
+| -------- | -------------------------------------------- | ------------------------------------------ |
+| name     | <mark style="color:green;">`string`</mark>   | Name of the hook, see above.               |
+| id       | <mark style="color:green;">`string`</mark>   | Id of the hook.                            |
+| function | <mark style="color:green;">`function`</mark> | Function to be called when hook is called. |
+
+<mark style="color:purple;">`hook`</mark> `remove(`<mark style="color:green;">`name`</mark>, <mark style="color:green;">`id`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+Removes the specific hook.
+
+| Name | Type                                       | Description                  |
+| ---- | ------------------------------------------ | ---------------------------- |
+| name | <mark style="color:green;">`string`</mark> | Name of the hook, see above. |
+| id   | <mark style="color:green;">`string`</mark> | Id of the hook.              |
+
+<mark style="color:purple;">`hook`</mark> `removeall()` -> <mark style="color:purple;">void</mark>
+
+Removes all hooks that are active.
+
+<mark style="color:purple;">`hook`</mark> `addkey(`<mark style="color:green;">`key`</mark>, <mark style="color:green;">`id`</mark>, <mark style="color:green;">`function`</mark> -> <mark style="color:purple;">`toggle`</mark>`)`-> <mark style="color:purple;">void</mark>
+
+Adds a hook on a key and will trigger the callback when pressed, takes VK Codes. <https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes>
+
+| Name     | Type                                         | Description                                  |
+| -------- | -------------------------------------------- | -------------------------------------------- |
+| key      | <mark style="color:green;">`number`</mark>   | The virtual key code. Example: 0x41 = A Key. |
+| function | <mark style="color:green;">`function`</mark> | Callback function.                           |
+| id       | <mark style="color:green;">`string`</mark>   | Id of the hook.                              |
+
+<mark style="color:purple;">`hook`</mark> `removekey(`<mark style="color:green;">`key`</mark>, <mark style="color:green;">`id`</mark>`)`-> <mark style="color:purple;">bool</mark>
+
+Removes the key hook.
+
+| Name | Type                                       | Description     |
+| ---- | ------------------------------------------ | --------------- |
+| key  | <mark style="color:green;">`number`</mark> | VK Key number.  |
+| id   | <mark style="color:green;">`string`</mark> | Id of the hook. |
+
+```lua
+local place_id = get_placeid()
+local screen_size = get_screen_size()
+
+hook.add("append_watermark", "a", function()
+    return tostring(place_id)
+end)
+
+hook.add("render", "hook example", function()
+    render.add_circle(vector2(screen_size.x / 2, screen_size.y / 2), 100, color(1, 1, 1, 1))
+end)
+
+wait(1000)
+
+hook.remove("render","hook example")
+
+hook.addkey(0x0D, "key example", function(toggle) -- 0x0D is the key code for the enter key
+    if toggle then
+        print("gleep")
+    end
+end)
+
+wait(1000)
+
+hook.removekey(0x0D, "key example")
+```
