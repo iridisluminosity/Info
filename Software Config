@@ -1,0 +1,13 @@
+# config
+
+<mark style="color:purple;">`config`</mark> `create(`<mark style="color:green;">`name`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Creates the config.
+
+<mark style="color:purple;">`config`</mark> `save(`<mark style="color:green;">`name`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Saves the config.
+
+<mark style="color:purple;">`config`</mark> `load(`<mark style="color:green;">`name`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Loads the config.
