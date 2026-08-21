@@ -1,0 +1,83 @@
+# humanoid
+
+<mark style="color:purple;">`instance`</mark> `health` -> <mark style="color:purple;">float</mark>
+
+Gets the humanoid health of the character.
+
+<mark style="color:purple;">`instance`</mark> `max_health` -> <mark style="color:purple;">float</mark>
+
+Gets the maximum health of the character.
+
+<mark style="color:purple;">`instance`</mark> `get_rigtype()` -> <mark style="color:purple;">rig\_type</mark>
+
+Gets the [rig type](/api/documentation/roblox/humanoid/rig-type.md).
+
+<mark style="color:purple;">`instance`</mark> `move_direction` -> <mark style="color:purple;">vector3</mark>
+
+Gets the direction of the character.
+
+<mark style="color:purple;">`instance`</mark> `jumppower` -> <mark style="color:purple;">float</mark>
+
+Gets the jumppower of the character.
+
+<mark style="color:purple;">`instance`</mark> `set_jumppower(`<mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the jumppower of the character.
+
+<mark style="color:purple;">`instance`</mark> `hipheight` -> <mark style="color:purple;">float</mark>
+
+Gets the hipheight of the character.
+
+<mark style="color:purple;">`instance`</mark> `set_hipheight(`<mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the hipheight of the character.
+
+<mark style="color:purple;">`instance`</mark> `walkspeed` -> <mark style="color:purple;">float</mark>
+
+Gets the walkspeed of the character.
+
+<mark style="color:purple;">`instance`</mark> `set_walkspeed(`<mark style="color:green;">`float`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the walkspeed of the character.
+
+<mark style="color:purple;">`instance`</mark> `sit` -> <mark style="color:purple;">bool</mark>
+
+Gets the sit state of the character.
+
+<mark style="color:purple;">`instance`</mark> `set_sit(`<mark style="color:green;">`bool`</mark>`)` -> <mark style="color:purple;">void</mark>
+
+Sets the sit state of the character.
+
+<mark style="color:purple;">`instance`</mark> `get_state()` -> <mark style="color:purple;">humanoid\_state</mark>
+
+Gets the current [humanoid state](/api/documentation/roblox/humanoid/humanoid-state.md).
+
+## Example
+
+```lua
+local players = game:get_service("Players")
+local localplayer = players.local_player
+local character = localplayer.character
+local humanoid = character:find_first_child_class("Humanoid")
+local move_direction = humanoid.move_direction
+
+humanoid:set_walkspeed(200)
+humanoid:set_jumppower(200)
+humanoid:set_hipheight(3)
+
+print(humanoid.health)
+print(humanoid.max_health)
+print(move_direction.x, move_direction.y, move_direction.z)
+
+if humanoid:get_state() == humanoid_state.FREE_FALL then
+    print("character is free falling")
+else
+    print("character is free falling")
+end
+
+if humanoid:get_rigtype() == rig_type.R6 then
+    print("character is r6")
+else
+    print("character is r15")
+end
+```
