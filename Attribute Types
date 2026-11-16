@@ -1,0 +1,21 @@
+# attribute type
+
+enum type of the attribute system.
+
+<mark style="color:purple;">`attribute_type`</mark>`:`
+
+`STRING` = <mark style="color:yellow;">6</mark>
+
+`NUMBER` = <mark style="color:yellow;">5</mark>
+
+`BOOLEAN` = <mark style="color:yellow;">1</mark>
+
+`VECTOR3` = <mark style="color:yellow;">12</mark>
+
+`VECTOR2` = <mark style="color:yellow;">11</mark>
+
+`COLOR` = <mark style="color:yellow;">17</mark>
+
+`ENUM` = <mark style="color:yellow;">33</mark>
+
+`CFRAME` = <mark style="color:yellow;">16</mark>
