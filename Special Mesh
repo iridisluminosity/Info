@@ -1,0 +1,24 @@
+# specialmesh
+
+Functions to get property information from specialmesh.
+
+<mark style="color:purple;">`instance`</mark> `get_meshid()` -> <mark style="color:purple;">string</mark>
+
+gets the mesh id string from the instance.
+
+<mark style="color:purple;">`instance`</mark> `get_textureid()` -> <mark style="color:purple;">string</mark>
+
+gets the texture id string from the instance.
+
+## Example
+
+```lua
+local woprkspace = game:get_service("Workspace")
+local random_specialmesh = workspace:find_first_child_class("SpecialMesh")
+
+local mesh = random_specialmesh:get_meshid()
+local texture = random_specialmesh:get_textureid()
+
+print(mesh)
+print(texture)
+```
