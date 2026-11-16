@@ -1,0 +1,43 @@
+# humanoid state
+
+enum types of the humanoid state.
+
+<mark style="color:purple;">`humanoid_state`</mark>`:`
+
+`FALLING_DOWN` = <mark style="color:yellow;">0</mark>
+
+`RAGDOLL` = <mark style="color:yellow;">1</mark>
+
+`GETTING_UP` = <mark style="color:yellow;">2</mark>
+
+`JUMPING` = <mark style="color:yellow;">3</mark>
+
+`SWIMMING` = <mark style="color:yellow;">4</mark>
+
+`FREE_FALL` = <mark style="color:yellow;">5</mark>
+
+`FLYING` = <mark style="color:yellow;">6</mark>
+
+`LANDED` = <mark style="color:yellow;">7</mark>
+
+`RUNNING` = <mark style="color:yellow;">8</mark>
+
+`RUNNING_NUN` = <mark style="color:yellow;">9</mark>
+
+`RUNNING_NO_PHYS` = <mark style="color:yellow;">10</mark>
+
+`STRAFING_NO_PHYS` = <mark style="color:yellow;">11</mark>
+
+`CLIMBING` = <mark style="color:yellow;">12</mark>
+
+`SEATED` = <mark style="color:yellow;">13</mark>
+
+`PLATFORM_STANDING` = <mark style="color:yellow;">14</mark>
+
+`DEAD` = <mark style="color:yellow;">15</mark>
+
+`PHYSICS` = <mark style="color:yellow;">16</mark>
+
+`NUM_STATE_TYPES` = <mark style="color:yellow;">17</mark>
+
+`NONE` = <mark style="color:yellow;">18</mark>
