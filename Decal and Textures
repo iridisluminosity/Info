@@ -1,0 +1,11 @@
+# decal/texture
+
+Functions to get property information from decals or texture.
+
+<mark style="color:purple;">`instance`</mark> `get_texture()` -> <mark style="color:purple;">string</mark>
+
+gets the texture from the instance.
+
+<mark style="color:purple;">`instance`</mark> `image_transparency` -> <mark style="color:purple;">float</mark>
+
+gets the transparency of the decal/texture instance
