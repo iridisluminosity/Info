@@ -1,0 +1,7 @@
+# sound
+
+Functions to get property information from sound.
+
+<mark style="color:purple;">`instance`</mark> `get_soundid()` -> <mark style="color:purple;">string</mark>
+
+gets the sound id from the instance.
