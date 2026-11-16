@@ -1,0 +1,246 @@
+# garbage collection
+
+Returns every live object in lua heap. (tables, functions, userdata, strings, threads)
+
+#### Credits <a href="#user-content-credits" id="user-content-credits"></a>
+
+* Query, gc table and lock design based on `GcLib` by `.chloe`.
+
+#### Examples
+
+```lua
+local objects = getgc()
+
+print(#objects)                                  -- 10000 - 20000
+print(objects[1].type, objects[1].address_hex)   -- userdata  0x2d00000
+```
+
+Filter by type:
+
+```lua
+getgc()                                      -- functions + userdata (default)
+getgc(true)                                  -- getgc() + tables
+getgc("string")                              -- strings only
+getgc{ types = { "function", "table" } }     -- several types
+getgc{ types = "userdata", limit = 500 }     -- capped
+```
+
+Read a string's contents:
+
+```lua
+for _, object in ipairs(getgc("string")) do
+    print(gc.describe(object.address).value)
+end
+```
+
+Group Instances by class, all Instances of a class share one metatable:
+
+```lua
+local classes = {}
+
+for _, object in ipairs(getgc("userdata")) do
+    local metatable = gc.describe(object.address).metatable_hex
+
+    if metatable then
+        classes[metatable] = (classes[metatable] or 0) + 1
+    end
+end
+```
+
+List C functions by code address, roblox strips function names:
+
+```lua
+for _, object in ipairs(getgc("function")) do
+    local info = gc.describe(object.address)
+
+    if info.is_c then
+        print(info.func_hex, object.address_hex)
+    end
+end
+```
+
+Find a table by its keys and change it:
+
+```lua
+local gun = gc.first({ "Ammo", "MaxAmmo" })
+
+if gun then
+    print(gun.Ammo)      -- live read
+    gun.Ammo = 999       -- live write
+end
+```
+
+Count what is on the heap:
+
+```lua
+for type, n in pairs(gc.count()) do
+    print(type, n)
+end
+```
+
+#### Entry fields
+
+<table><thead><tr><th width="129.5999755859375">Field</th><th width="84.166748046875">Type</th><th>Description</th></tr></thead><tbody><tr><td>address</td><td><mark style="color:green;"><code>number</code></mark></td><td>Address</td></tr><tr><td>address_hex</td><td><mark style="color:green;"><code>string</code></mark></td><td>Same address as <mark style="color:violet;"><code>0x2d00000</code></mark></td></tr><tr><td>type</td><td><mark style="color:green;"><code>string</code></mark></td><td><mark style="color:violet;"><code>string</code></mark>, <mark style="color:violet;"><code>table</code></mark>, <mark style="color:violet;"><code>function</code></mark>, <mark style="color:violet;"><code>userdata</code></mark>, <mark style="color:violet;"><code>thread</code></mark></td></tr><tr><td>tag</td><td><mark style="color:green;"><code>number</code></mark></td><td>Raw luau type tag</td></tr><tr><td>size</td><td><mark style="color:green;"><code>number</code></mark></td><td>Size class in bytes</td></tr><tr><td>marked</td><td><mark style="color:green;"><code>number</code></mark></td><td>GC mark bits</td></tr><tr><td>memcat</td><td><mark style="color:green;"><code>number</code></mark></td><td>Rblx memory category</td></tr></tbody></table>
+
+#### Options
+
+<table><thead><tr><th width="89.9000244140625">Option</th><th width="75.7332763671875">Default</th><th>Description</th></tr></thead><tbody><tr><td>types</td><td>.</td><td>Type name, or list of names. Overrides the flags below</td></tr><tr><td>tables</td><td><mark style="color:green;"><code>false</code></mark></td><td>Include tables</td></tr><tr><td>strings</td><td><mark style="color:green;"><code>false</code></mark></td><td>Include strings</td></tr><tr><td>threads</td><td><mark style="color:green;"><code>false</code></mark></td><td>Include coroutines</td></tr><tr><td>buffers</td><td><mark style="color:green;"><code>false</code></mark></td><td>Include buffers</td></tr><tr><td>dead</td><td><mark style="color:green;"><code>true</code></mark></td><td>Include objects the collector is about to free</td></tr><tr><td>limit</td><td><mark style="color:green;"><code>0</code></mark></td><td>Stop after N objects. <mark style="color:violet;"><code>0</code></mark> is unlimited</td></tr></tbody></table>
+
+`getgc(true)` is shorthand for `{ tables = true }`.
+
+`getgc("userdata")` is shorthand for `{ types = "userdata" }`.
+
+<mark style="color:purple;">`gc`</mark> `describe(`<mark style="color:green;">`address`</mark> `[,` <mark style="color:green;">`bytes`</mark>`])` -> <mark style="color:purple;">`table`</mark>\
+Reads one object's fields. Accepts a number, a hex string or a gc table. Pass `bytes` for a raw hex dump.
+
+```lua
+gc.describe(object.address)
+gc.describe("0x2d00000")
+gc.describe(address, 64).bytes
+```
+
+<table><thead><tr><th width="127.13330078125">Type</th><th>Fields</th></tr></thead><tbody><tr><td>string</td><td><mark style="color:violet;"><code>len</code></mark>, <mark style="color:violet;"><code>hash</code></mark>, <mark style="color:violet;"><code>value</code></mark></td></tr><tr><td>table</td><td><mark style="color:violet;"><code>sizenode</code></mark>, <mark style="color:violet;"><code>lsizenode</code></mark>, <mark style="color:violet;"><code>node_hex</code></mark>, <mark style="color:violet;"><code>metatable_hex</code></mark></td></tr><tr><td>function</td><td><mark style="color:violet;"><code>is_c</code></mark>, <mark style="color:violet;"><code>nupvalues</code></mark>, <mark style="color:violet;"><code>stacksize</code></mark>, <mark style="color:violet;"><code>env_hex</code></mark>, <mark style="color:violet;"><code>func_hex</code></mark> (C), <mark style="color:violet;"><code>proto_hex</code></mark> (Lua)</td></tr><tr><td>userdata</td><td><mark style="color:violet;"><code>utag</code></mark>, <mark style="color:violet;"><code>len</code></mark>, <mark style="color:violet;"><code>metatable_hex</code></mark>, <mark style="color:violet;"><code>data_hex</code></mark></td></tr></tbody></table>
+
+Returns `stale = true` if the object no longer exists.
+
+#### Queries
+
+A query picks tables by their string keys.
+
+<table><thead><tr><th width="317.2667236328125">Query</th><th>Matches</th></tr></thead><tbody><tr><td><code>"Ammo"</code></td><td>Tables with a non nil <mark style="color:violet;"><code>Ammo</code></mark></td></tr><tr><td><code>{ "Ammo", "MaxAmmo" }</code></td><td>Tables with both keys</td></tr><tr><td><code>{ "Ammo", Team = "Red" }</code></td><td><mark style="color:violet;"><code>Ammo</code></mark> set and <code>Team == "Red"</code></td></tr><tr><td><code>{ Owner = t }</code></td><td><mark style="color:violet;"><code>Owner</code></mark> points at that exact gc table</td></tr><tr><td><code>function(t) return t.Ammo > 10 end</code></td><td>Any table the function accepts, it gets a snapshot</td></tr></tbody></table>
+
+Key queries are matched natively and are fast. Function queries call lua for every table, so use keys and narrow the rest with <mark style="color:blue;">`filter`</mark>.
+
+Searches do not block other scripts while they run.
+
+#### Gc tables
+
+Results are gc tables, real lua tables that read and write the game table live.
+
+```lua
+local gun = gc.first({ "Ammo", "MaxAmmo" })
+
+print(gun.Ammo) -- reads the game table
+gun.Ammo = 999 -- writes it, errors if the key does not exist
+print(gun.Stats.Kills) -- nested tables are gc tables too
+
+for k, v in pairs(gun) do
+    print(k, v)
+end
+
+print(gc.address(gun), tostring(gun)) -- 2d00000  GcTable: 0x2d00000
+```
+
+The same address always gives the same gc table, so they work as keys in your own tables. Every function that takes an address also takes a gc table.
+
+#### Query options
+
+<table><thead><tr><th width="115.199951171875">Option</th><th width="76.5">Default</th><th>Description</th></tr></thead><tbody><tr><td>limit</td><td><mark style="color:green;"><code>0</code></mark></td><td>Stop after N tables. A number in place of the options table does the same</td></tr><tr><td>filter</td><td>.</td><td><code>function(snapshot)</code> run after the key match</td></tr><tr><td>sizes</td><td>.</td><td>Only tables whose <mark style="color:violet;"><code>lsizenode</code></mark> is in this list</td></tr><tr><td>exhaustive</td><td><mark style="color:green;"><code>false</code></mark></td><td>Skip the size cache and search every string size</td></tr><tr><td>budget_ms</td><td><mark style="color:green;"><code>0</code></mark></td><td>Give up after N milliseconds. <mark style="color:violet;"><code>0</code></mark> is unlimited</td></tr><tr><td>all_vms</td><td><mark style="color:green;"><code>true</code></mark></td><td>Try the other lua VMs when the selected one has no match, and switch to the one that does</td></tr></tbody></table>
+
+<mark style="color:purple;">`gc`</mark> `find(`<mark style="color:green;">`query`</mark> `[,` <mark style="color:green;">`options`</mark>`])` -> <mark style="color:purple;">`table`</mark>\
+Every matching table.
+
+```lua
+gc.find("Ammo")
+gc.find({ "Ammo" }, 5)
+gc.find({ "Health" }, { filter = function(t) return t.Health < 50 end })
+```
+
+<mark style="color:purple;">`gc`</mark> `first(`<mark style="color:green;">`query`</mark> `[,` <mark style="color:green;">`options`</mark>`])` -> <mark style="color:purple;">`table?`</mark>\
+First matching table, or `nil`.
+
+```lua
+local sword = gc.first({ Name = "Sword", "Damage" })
+```
+
+<mark style="color:purple;">`gc`</mark> `read(`<mark style="color:green;">`query`</mark> `[,` <mark style="color:green;">`field`</mark> `[,` <mark style="color:green;">`options`</mark>`]])` -> <mark style="color:purple;">`table`</mark>\
+Values from every matching table. `field` is a key, a list of keys, or `nil` for full snapshots.
+
+```lua
+gc.read("Ammo", "Ammo") -- { 30, 12, 999 }
+gc.read("Ammo", { "Ammo", "MaxAmmo" }) -- { { Ammo = 30, MaxAmmo = 30 }, ... }
+gc.read("Ammo") -- { snapshot, ... }
+```
+
+<mark style="color:purple;">`gc`</mark> `write(`<mark style="color:green;">`query`</mark>, <mark style="color:green;">`fields`</mark> `[,` <mark style="color:green;">`options`</mark>`])` -> <mark style="color:purple;">`number`</mark>\
+Writes into every matching table and returns how many values changed. Only existing keys are written, and only when the value differs. `fields` can be a function that gets a snapshot and returns the fields.
+
+```lua
+gc.write({ "Ammo", "MaxAmmo" }, { Ammo = 999 })
+gc.write("Ammo", function(t) return { Ammo = t.MaxAmmo } end)
+```
+
+<mark style="color:purple;">`gc`</mark> `lock(`<mark style="color:green;">`query`</mark>, <mark style="color:green;">`fields`</mark> `[,` <mark style="color:green;">`options`</mark>`])` -> <mark style="color:purple;">`lock`</mark>\
+Keeps writing `fields` into every matching table in the background. Runs on its own thread, so it keeps going while your script waits.
+
+```lua
+local lock = gc.lock({ "Ammo", "MaxAmmo" }, { Ammo = 999 })
+
+print(lock:count(), lock:writes())
+lock:stop(true)     -- true puts the old values back
+```
+
+| Option       | Default                                  | Description                          |
+| ------------ | ---------------------------------------- | ------------------------------------ |
+| interval\_ms | <mark style="color:green;">`15`</mark>   | Time between writes                  |
+| refind\_ms   | <mark style="color:green;">`5000`</mark> | Time between searches for new tables |
+
+The query options work here too.
+
+| Method                 | Returns                                                 |
+| ---------------------- | ------------------------------------------------------- |
+| `lock:stop([restore])` | Stops the lock. `true` restores the values it overwrote |
+| `lock:count()`         | Tables currently locked                                 |
+| `lock:writes()`        | Total writes made                                       |
+| `lock:running()`       | <mark style="color:purple;">`bool`</mark>               |
+| `lock:refind()`        | Searches again right away                               |
+| `lock:targets()`       | The locked gc tables                                    |
+
+A lock keeps its tables after it changes a value the query filtered on, so `gc.lock({ Ammo = 0 }, { Ammo = 999 })` works. Locks stop with their script.
+
+<mark style="color:purple;">`gc`</mark> `snapshot(`<mark style="color:green;">`table`</mark> `[,` <mark style="color:green;">`options`</mark>`])` -> <mark style="color:purple;">`table?`</mark>\
+A plain copy of a table. Nested tables stay gc tables unless `depth` copies them too.
+
+```lua
+local data = gc.snapshot(gun)
+local deep = gc.snapshot(gun, { depth = 2, limit = 500 })
+```
+
+<table><thead><tr><th width="262.8333740234375">Value</th><th>Comes back as</th></tr></thead><tbody><tr><td>string, number, boolean, vector</td><td>Itself</td></tr><tr><td>table</td><td>Gc table</td></tr><tr><td>function, userdata, thread</td><td><code>{</code> <mark style="color:violet;"><code>type</code></mark>, <mark style="color:violet;"><code>address</code></mark>, <mark style="color:violet;"><code>address_hex</code></mark> <code>}</code></td></tr></tbody></table>
+
+#### Writing values
+
+`t.key = value`, `gc.update`, `gc.write`, `gc.lock` and `setgc` accept <mark style="color:green;">`number`</mark>, <mark style="color:green;">`boolean`</mark>, <mark style="color:green;">`nil`</mark>, <mark style="color:green;">`vector3`</mark>, <mark style="color:green;">`string`</mark> and <mark style="color:purple;">gc</mark> tables.
+
+* Only existing keys can be written, new keys cannot be added.
+* Strings must already exist in the game, and gc tables must be from the same lua VM.
+* Numbers and booleans are safe. Strings and tables can be freed by the collector while the game still uses them, which crashes.
+
+<mark style="color:purple;">`gc`</mark> `write(`<mark style="color:green;">`address`</mark>, <mark style="color:green;">`offset`</mark>, <mark style="color:green;">`kind`</mark>, <mark style="color:green;">`value`</mark>`)` -> <mark style="color:purple;">`bool`</mark>\
+Raw typed write, for fields this module does not model. `kind` is one of (<mark style="color:blue;">`u8`</mark>, <mark style="color:blue;">`u16`</mark>, <mark style="color:blue;">`u32`</mark>, <mark style="color:blue;">`i32`</mark>, <mark style="color:blue;">`u64`</mark>, <mark style="color:blue;">`ptr`</mark>, <mark style="color:blue;">`float`</mark>, <mark style="color:blue;">`double`</mark>). Also available as `gc.write_raw`.
+
+```lua
+gc.write(address, 0x04, "u8", 1)
+```
+
+No validation beyond bounds. A wrong offset corrupts the object leading to a crash.
+
+#### API
+
+<table><thead><tr><th width="357.13330078125">Function</th><th>Returns</th></tr></thead><tbody><tr><td><code>getgc([options])</code></td><td>Array of objects</td></tr><tr><td><code>gc.describe(address [, bytes])</code></td><td>One object's fields</td></tr><tr><td><code>gc.count()</code></td><td>Live object count per type</td></tr><tr><td><code>gc.stats()</code></td><td><mark style="color:violet;"><code>pages</code></mark>, <mark style="color:violet;"><code>cells</code></mark>, <mark style="color:violet;"><code>busy_blocks</code></mark>, <mark style="color:violet;"><code>totalbytes</code></mark></td></tr><tr><td><code>gc.find(query [, options])</code></td><td>Matching gc tables</td></tr><tr><td><code>gc.first(query [, options])</code></td><td>First matching gc table</td></tr><tr><td><code>gc.read(query [, field [, options]])</code></td><td>Values from matching tables</td></tr><tr><td><code>gc.write(query, fields [, options])</code></td><td>Number of values changed</td></tr><tr><td><code>gc.lock(query, fields [, options])</code></td><td>Lock handle</td></tr><tr><td><code>gc.snapshot(table [, options])</code></td><td>Plain copy of a table</td></tr><tr><td><code>gc.tables([options])</code></td><td>Every table</td></tr><tr><td><code>gc.for_each_table(fn [, options])</code></td><td>Calls <code>fn(t)</code> per table, stops when it returns <code>true</code></td></tr><tr><td><code>gc.update(t, fields)</code></td><td>Number of fields written</td></tr><tr><td><code>gc.alive(t [, key])</code></td><td><mark style="color:purple;"><code>bool</code></mark>, table still exists (and has <code>key</code>)</td></tr><tr><td><code>gc.wrap(address)</code></td><td>Gc table for an address</td></tr><tr><td><code>gc.address(t)</code></td><td>Address of a gc table</td></tr><tr><td><code>gc.is_proxy(value)</code></td><td><mark style="color:purple;"><code>bool</code></mark></td></tr><tr><td><code>setgc(address, key, value)</code></td><td><code>{</code> <mark style="color:violet;"><code>ok</code></mark>, <mark style="color:violet;"><code>error</code></mark>, <mark style="color:violet;"><code>type</code></mark>, <mark style="color:violet;"><code>previous_type</code></mark> <code>}</code></td></tr><tr><td><code>gc.read_table(address [, limit])</code></td><td>Older snapshot, nested tables as <code>{ type, address }</code></td></tr><tr><td><code>gc.keys(address [, limit])</code></td><td>Keys and values with offsets and types</td></tr><tr><td><code>gc.find_tables(key [, value [, limit]])</code></td><td>Older search, <code>{</code> <mark style="color:violet;"><code>address</code></mark>, <mark style="color:violet;"><code>address_hex</code></mark>, <mark style="color:violet;"><code>value</code></mark> <code>}</code></td></tr><tr><td><code>gc.probe(address [, span])</code></td><td>Slot by slot dump of an object</td></tr><tr><td><code>gc.layout()</code></td><td>Which heap is locked onto</td></tr><tr><td><code>gc.vms()</code></td><td>Every lua VM found</td></tr><tr><td><code>gc.select(index)</code></td><td>Uses a VM from <code>gc.vms()</code></td></tr><tr><td><code>gc.attach([options])</code></td><td><code>true, global</code> or <code>false, reason</code>. Options <code>global</code>, <code>roots</code>, <code>verify</code></td></tr><tr><td><code>gc.candidates([instances])</code></td><td>VMs your scripts run in</td></tr><tr><td><code>gc.is_attached()</code></td><td><mark style="color:purple;"><code>bool</code></mark></td></tr><tr><td><code>gc.global()</code></td><td>Address of the selected VM</td></tr><tr><td><code>gc.refresh()</code></td><td>Refreshes garbage collection</td></tr><tr><td><code>gc.diagnose()</code></td><td>Step by step report when the heap is not found</td></tr><tr><td><code>gc.histogram()</code></td><td>Raw type tag</td></tr></tbody></table>
+
+#### Notes
+
+* Results are a snapshot. The collector keeps running, so an object may be freed after the walk. `gc.describe` reports `stale` when that happens.
+* Addresses stay valid for as long as the object lives, luau never moves a live object.
+
+#### Troubleshooting
+
+```lua
+for k, v in pairs(gc.diagnose()) do 
+    print(k, v) 
+end
+```
+
+* A key you know exists is not found: retry with `{ exhaustive = true }`.
+* Wrong game picked: `gc.attach{ verify = "SomeKey" }` picks the VM that has a table with that key.
