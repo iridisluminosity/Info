@@ -1,0 +1,95 @@
+# material type
+
+enum type of the material system.
+
+<mark style="color:purple;">`material_type`</mark> `:`
+
+`RUBBER` = <mark style="color:yellow;">2311</mark>&#x20;
+
+`PLASTER` = <mark style="color:yellow;">2310</mark>&#x20;
+
+`LEATHER` = <mark style="color:yellow;">2309</mark>&#x20;
+
+`ROOFSHINGLES` = <mark style="color:yellow;">2308</mark>&#x20;
+
+`CLAYFOOFTILES` = <mark style="color:yellow;">2307</mark>&#x20;
+
+`CERAMICTILES` = <mark style="color:yellow;">2306</mark>&#x20;
+
+`CARPET` = <mark style="color:yellow;">2305</mark>&#x20;
+
+`CARDBOARD` = <mark style="color:yellow;">2304</mark>&#x20;
+
+`WATER` = <mark style="color:yellow;">2048</mark>&#x20;
+
+`AIR` = <mark style="color:yellow;">1792</mark>&#x20;
+
+`FORCEFIELD` = <mark style="color:yellow;">1584</mark>&#x20;
+
+`GLASS` = <mark style="color:yellow;">1568</mark>&#x20;
+
+`GLACIER` = <mark style="color:yellow;">1552</mark>&#x20;
+
+`ICE` = <mark style="color:yellow;">1536</mark>&#x20;
+
+`SALT` = <mark style="color:yellow;">1392</mark>&#x20;
+
+`ASPHALT` = <mark style="color:yellow;">1376</mark>&#x20;
+
+`GROUND` = <mark style="color:yellow;">1360</mark>&#x20;
+
+`MUD` = <mark style="color:yellow;">1344</mark>&#x20;
+
+`SNOW` = <mark style="color:yellow;">1328</mark>&#x20;
+
+`FABRIC` = <mark style="color:yellow;">1312</mark>&#x20;
+
+`SAND` = <mark style="color:yellow;">1296</mark>&#x20;
+
+`LEAFYGRASS` = <mark style="color:yellow;">1284</mark>&#x20;
+
+`GRASS` = <mark style="color:yellow;">1280</mark>&#x20;
+
+`SANDSTONE` = <mark style="color:yellow;">912</mark>
+
+`PEBBLE` = <mark style="color:yellow;">864</mark>&#x20;
+
+`COBBLESTONE` = <mark style="color:yellow;">880</mark>&#x20;
+
+`ROCK` = <mark style="color:yellow;">896</mark>&#x20;
+
+`BRICK` = <mark style="color:yellow;">848</mark>&#x20;
+
+`PAVEMENT` = <mark style="color:yellow;">836</mark>&#x20;
+
+`GRANITE` = <mark style="color:yellow;">832</mark>&#x20;
+
+`LIMESTONE` = <mark style="color:yellow;">820</mark>&#x20;
+
+`CONCRETE` = <mark style="color:yellow;">816</mark>&#x20;
+
+`CRACKEDLAVA` = <mark style="color:yellow;">804</mark>&#x20;
+
+`SLATE` = <mark style="color:yellow;">800</mark>&#x20;
+
+`BASALT` = <mark style="color:yellow;">788</mark>&#x20;
+
+`MARBLE` = <mark style="color:yellow;">784</mark>&#x20;
+
+`WOODPLANKS` = <mark style="color:yellow;">528</mark>&#x20;
+
+`WOOD` = <mark style="color:yellow;">512</mark>&#x20;
+
+`METAL` = <mark style="color:yellow;">1088</mark>&#x20;
+
+`FOIL` = <mark style="color:yellow;">1072</mark>&#x20;
+
+`DIAMONDPLATE` = <mark style="color:yellow;">1056</mark>&#x20;
+
+`CORRODEDMETAL` = <mark style="color:yellow;">1040</mark>&#x20;
+
+`NEON` = <mark style="color:yellow;">288</mark>&#x20;
+
+`SMOOTHPLASTIC` = <mark style="color:yellow;">272</mark>&#x20;
+
+`PLASTIC` = <mark style="color:yellow;">256</mark>
