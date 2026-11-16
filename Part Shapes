@@ -1,0 +1,15 @@
+# shape
+
+enum type of the material system.
+
+<mark style="color:purple;">`shape_type`</mark> `:`
+
+`BALL` = <mark style="color:yellow;">0</mark>
+
+`CYLINDER` = <mark style="color:yellow;">1</mark>
+
+`BLOCK` = <mark style="color:yellow;">2</mark>
+
+`WEDGE` = <mark style="color:yellow;">3</mark>
+
+`CORNER_WEDGE` = <mark style="color:yellow;">4</mark>
