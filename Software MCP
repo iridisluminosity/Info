@@ -1,0 +1,184 @@
+# MCP
+
+Lets AI tools (Claude Code, ZCODE, Cursor, DeepSeek, Codex and any other AI agent) write, run and debug scripts directly within their harness.
+
+**How it works.**
+
+Runs a small MCP server on your PC. Your AI tool connects to it and gets tools to run Lua in Photon, read the console, look around the game and read these docs, so it can test its own code instead of guessing.
+
+* This feature is off by default. Turn it on with the <mark style="color:purple;">`MCP: Off`</mark> button in the Scripts tab.
+* When it starts, the address is copied to your clipboard and printed in the console: `http://127.0.0.1:7711/mcp`. If port 7711 is taken it uses the next free one up to 7720.
+
+**Setup.**
+
+Turn on MCP in the Scripts tab, then later on implement the MCP server in your harness.
+
+{% tabs %}
+{% tab title="Claude Code" %}
+
+```
+claude mcp add --transport http photon http://127.0.0.1:7711/mcp
+```
+
+{% endtab %}
+
+{% tab title="Cursor" %}
+Add to `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "photon": { "url": "http://127.0.0.1:7711/mcp" }
+  }
+}
+```
+
+{% endtab %}
+
+{% tab title="VS Code" %}
+Add to `.vscode/mcp.json`:
+
+```json
+{
+  "servers": {
+    "photon": { "type": "http", "url": "http://127.0.0.1:7711/mcp" }
+  }
+}
+```
+
+{% endtab %}
+
+{% tab title="Claude Desktop" %}
+Claude Desktop needs the `mcp-remote` bridge (requires Node.js). Add to `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "photon": { "command": "npx", "args": ["mcp-remote", "http://127.0.0.1:7711/mcp"] }
+  }
+}
+```
+
+{% endtab %}
+
+{% tab title="Codex" %}
+Add to `~/.codex/config.toml`:
+
+```
+[mcp_servers.photon]url = "http://127.0.0.1:7711/mcp"
+```
+
+{% endtab %}
+{% endtabs %}
+
+* Photon must be running with MCP turned on before your AI tool connects. If you turn it on later, reconnect the server in your AI tool.
+
+**All available tools.**
+
+These are what the AI can call. You don't call them yourself, just ask the AI for what you want.
+
+<table data-search="false"><thead><tr><th width="200">Name</th><th>Arguments</th><th>Description</th></tr></thead><tbody><tr><td>execute_lua</td><td><mark style="color:green;"><code>code, name, wait_ms</code></mark></td><td>Runs Lua as a new script and returns its console output and returned values.</td></tr><tr><td>get_console</td><td><mark style="color:green;"><code>since, limit</code></mark></td><td>Reads the console, print() output and errors.</td></tr><tr><td>clear_console</td><td><mark style="color:green;"><code>void</code></mark></td><td>Clears the console.</td></tr><tr><td>list_scripts</td><td><mark style="color:green;"><code>void</code></mark></td><td>Lists running scripts.</td></tr><tr><td>stop_script</td><td><mark style="color:green;"><code>id, all</code></mark></td><td>Stops one script, or all of them.</td></tr><tr><td>get_api</td><td><mark style="color:green;"><code>filter</code></mark></td><td>Lists every Lua function and type method Photon has.</td></tr><tr><td>get_docs</td><td><mark style="color:green;"><code>page</code></mark></td><td>Reads this documentation.</td></tr><tr><td>get_game_info</td><td><mark style="color:green;"><code>void</code></mark></td><td>Place id, job id, local player, player count, ping and fps.</td></tr><tr><td>explore</td><td><mark style="color:green;"><code>path, depth</code></mark></td><td>Browses the game's instance tree, e.g. Workspace or Players.LocalPlayer.Character.</td></tr><tr><td>list_saved_scripts</td><td><mark style="color:green;"><code>void</code></mark></td><td>Lists the scripts in your scripts folder.</td></tr><tr><td>read_saved_script</td><td><mark style="color:green;"><code>name</code></mark></td><td>Reads a saved script.</td></tr><tr><td>save_script</td><td><mark style="color:green;"><code>name, code</code></mark></td><td>Saves a script to your scripts folder, it shows up in the Scripts tab.</td></tr><tr><td>list_script_tools</td><td><mark style="color:green;"><code>void</code></mark></td><td>Lists tools your scripts added with mcp.add_tool.</td></tr><tr><td>call_script_tool</td><td><mark style="color:green;"><code>name, arguments</code></mark></td><td>Calls a tool a script added.</td></tr></tbody></table>
+
+* Output from <mark style="color:green;">`execute_lua`</mark> includes every console line printed while the script ran, from any script.
+* A script that keeps running (a loop or a hook) is left running after <mark style="color:green;">`execute_lua`</mark> returns. The AI reads its output later with <mark style="color:green;">`get_console`</mark> and stops it with <mark style="color:green;">`stop_script`</mark>.
+* A `return` in the code sends its values back to the AI.
+
+**Console example from an AI**'**s perspective.**
+
+```lua
+local players = game:get_service("Players")
+
+local count = 0
+for _, player in ipairs(players:get_children()) do
+    count = count + 1
+end
+
+return count
+```
+
+Console output:
+
+```
+script 4 (mcp_1) finished in 3 ms
+--- console ---
+[118] => 12
+```
+
+**Calling your script from outside Photon.**
+
+Scripts can add their own tools. Any MCP client, or any program that talks MCP, can then call functions inside your running script.
+
+<mark style="color:purple;">`mcp`</mark> `add_tool(`<mark style="color:green;">`name`</mark>, <mark style="color:green;">`description`</mark>, <mark style="color:green;">`callback`</mark>, <mark style="color:green;">`params`</mark>`)` -> <mark style="color:purple;">bool/nil, string</mark>
+
+Adds a tool. When it is called, callback receives the arguments as a table, and whatever it returns is sent back.
+
+<table><thead><tr><th>Name</th><th>Type</th><th width="274">Description</th></tr></thead><tbody><tr><td>name</td><td><mark style="color:green;"><code>string</code></mark></td><td>Name</td></tr><tr><td>description</td><td><mark style="color:green;"><code>string</code></mark></td><td>Self explanatory</td></tr><tr><td>callback</td><td><mark style="color:green;"><code>function</code></mark></td><td>Self explanatory</td></tr><tr><td>params</td><td><mark style="color:green;"><code>table</code></mark> <mark style="color:purple;">-></mark> optional</td><td>The arguments, see below.</td></tr></tbody></table>
+
+* Each entry in params is either a description, or a table with `type`, `description` and `required`.
+* Types are `string`, `number`, `integer`, `boolean`, `table` and `array`.
+* Return a table and it is sent as JSON. Throwing an error sends the error back.
+* The callback must return within 10 seconds, so keep it short and don't call wait() in it.
+* The tool is removed when the script is stopped.
+
+```lua
+mcp.add_tool("teleport_to", "Teleports me next to a player", function(args)
+    local players = game:get_service("Players")
+    local target = players:find_first_child(args.player)
+    if not target or not target.character then
+        error("no player named " .. tostring(args.player))
+    end
+
+    local root = target.character:find_first_child("HumanoidRootPart")
+    local me = players.local_player.character:find_first_child("HumanoidRootPart")
+    me:set_position(root.position + vector3(0, 0, 3))
+    return { ok = true, player = target.name }
+end, {
+    player = { type = "string", description = "Player name", required = true },
+})
+```
+
+<mark style="color:purple;">`mcp`</mark> `remove_tool(`<mark style="color:green;">`name`</mark>`)` -> <mark style="color:purple;">bool</mark>
+
+Removes a tool. Returns false if it didn't exist.
+
+<mark style="color:purple;">`mcp`</mark> `list_tools()` -> <mark style="color:purple;">table</mark>
+
+Returns the names of every tool scripts have added.
+
+<mark style="color:purple;">`mcp`</mark> `is_running()` -> <mark style="color:purple;">bool</mark>
+
+Returns true if the MCP server is on.
+
+<mark style="color:purple;">`mcp`</mark> `get_url()` -> <mark style="color:purple;">string/nil</mark>
+
+Returns the server address, e.g. `http://127.0.0.1:7711/mcp`, or nil if it is off.
+
+<mark style="color:purple;">`mcp`</mark> `get_port()` -> <mark style="color:purple;">int/nil</mark>
+
+Returns the server port, or nil if it is off.
+
+**Calling a tool from your own program.**
+
+The server speaks plain JSON-RPC over HTTP, so any language can call it. Send an `initialize` request once, then call tools with `tools/call`:
+
+```python
+import json, urllib.request
+
+URL = "http://127.0.0.1:7711/mcp"
+
+def rpc(method, params=None, id=1):
+    body = json.dumps({"jsonrpc": "2.0", "id": id, "method": method, "params": params or {}}).encode()
+    request = urllib.request.Request(URL, body, {"Content-Type": "application/json", "Accept": "application/json, text/event-stream"})
+    return json.loads(urllib.request.urlopen(request).read())
+
+rpc("initialize", {"protocolVersion": "2025-06-18", "capabilities": {}, "clientInfo": {"name": "my-tool", "version": "1.0"}})
+
+# A tool your script added
+print(rpc("tools/call", {"name": "teleport_to", "arguments": {"player": "PLAYER_123"}}, id=2))
+
+# Run Lua directly
+print(rpc("tools/call", {"name": "execute_lua", "arguments": {"code": "return 1 + 1"}}, id=3))
+```
+
+* Added a tool while your AI tool was already connected? Reconnect it to see the new tool, or call it with `call_script_tool`.
+* If a script loops without wait(), it blocks every other script and the MCP tools wait for it. Stop it with `stop_script` (`all = true` always works).
