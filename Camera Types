@@ -1,0 +1,23 @@
+# camera type
+
+enum type of the camera type.
+
+<mark style="color:purple;">`camera_type`</mark>`:`
+
+`FIXED_CAMERA` = <mark style="color:yellow;">0</mark>
+
+`ATTACH_CAMERA` = <mark style="color:yellow;">1</mark>
+
+`WATCH_CAMERA` = <mark style="color:yellow;">2</mark>
+
+`TRACK_CAMERA` = <mark style="color:yellow;">3</mark>
+
+`FOLLOW_CAMERA` = <mark style="color:yellow;">4</mark>
+
+`CUSTOM_CAMERA` = <mark style="color:yellow;">5</mark>
+
+`SCRIPTABLE_CAMERA`  = <mark style="color:yellow;">6</mark>
+
+`ORBITAL_CAMERA` = <mark style="color:yellow;">7</mark>
+
+`NUM_CAMERA_TYPE` = <mark style="color:yellow;">8</mark>
