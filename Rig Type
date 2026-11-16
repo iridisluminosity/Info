@@ -1,0 +1,9 @@
+# rig type
+
+enum types of the rig system.
+
+<mark style="color:purple;">`rigtype`</mark>`:`
+
+`R6` = <mark style="color:yellow;">0</mark>
+
+`R15` = <mark style="color:yellow;">1</mark>
